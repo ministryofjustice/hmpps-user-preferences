@@ -34,7 +34,7 @@ spec:
                         - {{ template "app.name" . }}
                 topologyKey: kubernetes.io/hostname
       containers:
-        - name: hmpps-template-kotlin
+        - name: hmpps-user-preferences
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.image.port }}
