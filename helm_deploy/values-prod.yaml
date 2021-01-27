@@ -4,7 +4,7 @@
 replicaCount: 4
 
 image:
-  repository: quay.io/hmpps/hmpps-template-kotlin
+  repository: quay.io/hmpps/hmpps-user-preferences
   tag: latest
   port: 8080
 
@@ -12,8 +12,8 @@ ingress:
   enabled: true
   enable_whitelist: true
   hosts:
-    - host: hmpps-template-kotlin.hmpps.service.justice.gov.uk
-      cert_secret: hmpps-template-kotlin-cert
+    - host: hmpps-user-preferences.hmpps.service.justice.gov.uk
+      cert_secret: hmpps-user-preferences-cert
   path: /
 
 env:
