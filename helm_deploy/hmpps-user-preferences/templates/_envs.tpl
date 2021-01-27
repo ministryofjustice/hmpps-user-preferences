@@ -13,10 +13,10 @@ env:
   - name: SPRING_PROFILES_ACTIVE
     value: "logstash"
 
-{{/*  - name: APPLICATION_INSIGHTS_IKEY*/}}
-{{/*    valueFrom:*/}}
-{{/*      secretKeyRef:*/}}
-{{/*        name: {{ template "app.name" . }}*/}}
-{{/*        key: APPINSIGHTS_INSTRUMENTATIONKEY*/}}
+  - name: APPLICATION_INSIGHTS_IKEY
+    valueFrom:
+      secretKeyRef:
+        name: hmpps-user-preferences-secrets
+        key: APPINSIGHTS_INSTRUMENTATIONKEY
 
 {{- end -}}
