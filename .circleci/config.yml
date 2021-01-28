@@ -42,6 +42,7 @@ workflows:
                 - main
       - hmpps/deploy_env:
           name: deploy_dev
+          retrieve_secrets: none
           env: "dev"
           context: hmpps-common-vars
           filters:
@@ -58,6 +59,7 @@ workflows:
             - deploy_dev
       - hmpps/deploy_env:
           name: deploy_preprod
+          retrieve_secrets: none
           env: "preprod"
           context:
             - hmpps-common-vars
@@ -70,6 +72,7 @@ workflows:
             - deploy_preprod
       - hmpps/deploy_env:
           name: deploy_prod
+          retrieve_secrets: none
           env: "prod"
           slack_notification: true
           context:
