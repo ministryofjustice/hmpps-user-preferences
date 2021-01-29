@@ -1,16 +1,30 @@
 version: "3"
 services:
+  hmpps-user-preferences:
+    build:
+      context: .
+    network_mode: "host"
+    container_name: hmpps-user-preferences
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ping"]
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev
 
   postgres:
     image: circleci/postgres:11.6-alpine-ram
     container_name: postgres
     ports:
-      - 5437:5437
+      - 5432:5432
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: dev
     volumes:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
+
+
 
 networks:
   hmpps:
