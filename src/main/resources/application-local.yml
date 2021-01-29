@@ -3,7 +3,7 @@ notify:
 
 postgres:
   uri: localhost:5432
-  db: interventions
+  db: preferences
   username: postgres
   password: password
 
