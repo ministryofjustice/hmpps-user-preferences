@@ -18,12 +18,9 @@ spring:
       name: hmppsuserpreferences
 
   datasource:
-    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    hibernate:
-      ddl-auto: update
+    url: jdbc:postgresql://${postgres.uri}/${postgres.db}
+    username: ${postgres.username}
+    password: ${postgres.password}
 
 server:
   port: 8080
