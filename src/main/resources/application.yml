@@ -22,6 +22,11 @@ spring:
     username: ${postgres.username}
     password: ${postgres.password}
 
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate:
+      ddl-auto: update
+
 server:
   port: 8080
   servlet:
