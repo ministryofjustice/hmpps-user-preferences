@@ -23,9 +23,11 @@ spring:
     password: ${postgres.password}
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    hibernate:
-      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 server:
   port: 8080
