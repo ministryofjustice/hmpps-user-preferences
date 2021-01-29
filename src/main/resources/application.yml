@@ -27,6 +27,12 @@ jpa:
   hibernate:
     ddl-auto: update
 
+postgres:
+  uri: localhost:5432
+  db: preferences
+  username: postgres
+  password: password
+
 server:
   port: 8080
   servlet:
