@@ -25,7 +25,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         jdbc:
           lob:
             non_contextual_creation: true
