@@ -7,6 +7,15 @@ orbs:
 jobs:
   validate:
     executor: hmpps/java
+    docker:
+      - image: cimg/openjdk:11.0
+        environment:
+          POSTGRES_DB: circle_test
+      - image: circleci/postgres:10-alpine-ram
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: preferences_test
+          POSTGRES_PASSWORD: dev
     steps:
       - checkout
       - restore_cache:

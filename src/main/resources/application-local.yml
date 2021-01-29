@@ -1,0 +1,14 @@
+notify:
+  enabled: false
+
+postgres:
+  uri: localhost:5432
+  db: preferences
+  username: postgres
+  password: password
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

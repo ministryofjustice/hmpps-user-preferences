@@ -13,6 +13,23 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+  database:
+    schema:
+      name: hmppsuserpreferences
+
+  datasource:
+    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+
 server:
   port: 8080
   servlet:
