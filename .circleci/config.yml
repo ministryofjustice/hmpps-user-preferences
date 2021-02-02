@@ -83,7 +83,7 @@ workflows:
           name: deploy_prod
           retrieve_secrets: none
           env: "prod"
-          slack_channel_name: probation-in-court-dev
+          slack_channel_name: probation_in_court_dev
           slack_notification: true
           context:
             - hmpps-common-vars
