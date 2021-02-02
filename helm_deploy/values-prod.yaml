@@ -13,7 +13,7 @@ ingress:
   enable_whitelist: true
   hosts:
     - host: hmpps-user-preferences.hmpps.service.justice.gov.uk
-      cert_secret: hmpps-user-preferences-cert
+      cert_secret: hmpps-user-preferences-secret
   path: /
 
 env:
