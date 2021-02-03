@@ -12,7 +12,5 @@ services:
     volumes:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 
-
-
 networks:
   hmpps:
