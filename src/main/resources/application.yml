@@ -35,7 +35,7 @@ spring:
     hibernate:
       dialect: org.hibernate.dialect.MySQL5Dialect
       show-sql: false
-      ddl-auto: create-drop
+      ddl-auto: validate
 
 server:
   port: 8080
