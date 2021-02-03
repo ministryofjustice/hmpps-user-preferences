@@ -21,9 +21,9 @@ spring:
     url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:preferences}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
 
   jpa:
+    show-sql: false
     hibernate:
       dialect: org.hibernate.dialect.MySQL5Dialect
-      show-sql: false
       ddl-auto: validate
 
 server:
