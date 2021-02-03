@@ -16,5 +16,7 @@ logging:
       springframework:
         security: DEBUG
 spring:
+  jpa:
+    show-sql: true
   flyway:
     locations: classpath:db/migration,classpath:db/local
