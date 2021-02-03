@@ -29,7 +29,7 @@ spring:
       name: hmppsuserpreferences
 
   datasource:
-    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:preferences}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
+    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
 
   jpa:
     show-sql: false
