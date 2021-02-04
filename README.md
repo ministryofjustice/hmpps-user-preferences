@@ -8,7 +8,6 @@ Api to manage court users' preferences
 
 - Docker
 - Java
-- Flyway
 
 Build and test:
 
