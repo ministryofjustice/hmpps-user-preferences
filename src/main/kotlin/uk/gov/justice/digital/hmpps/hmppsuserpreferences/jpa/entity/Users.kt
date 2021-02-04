@@ -11,7 +11,7 @@ import javax.persistence.Id
 @Entity
 @TypeDef(name = "list-array", typeClass = ListArrayType::class)
 data class Users(
-  @Id val id: UUID? = null,
+  @Id val id: UUID,
   @Type(type = "list-array") @Column(name = "courts", columnDefinition = "text[]")
-  var courts: List<String>? = null
+  var courts: List<String>
 )
