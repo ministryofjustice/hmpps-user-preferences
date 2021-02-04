@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.hmppsuserpreferences.model
+package uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity
 
 import com.vladmihalcea.hibernate.type.array.ListArrayType
 import org.hibernate.annotations.Type
