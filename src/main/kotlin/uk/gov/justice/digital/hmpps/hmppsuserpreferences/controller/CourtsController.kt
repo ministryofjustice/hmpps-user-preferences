@@ -19,6 +19,6 @@ class CourtsController {
 
   @ResponseStatus(value = HttpStatus.CREATED)
   @PutMapping("/users/{uuid}/preferences/courts")
-  fun updatePreferences(@PathVariable uuid: UUID, @RequestBody user: Users): List<String>? =
+  fun updatePreferences(@PathVariable uuid: UUID, @RequestBody user: Users): List<String> =
     repository.save(Users(uuid, user.courts)).courts
 }
