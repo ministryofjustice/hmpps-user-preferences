@@ -1,5 +1,6 @@
+create extension if not exists hstore;
 create table if not exists users (
     id uuid not null unique,
-    courts text[],
+    properties hstore,
     primary key (id)
 );
