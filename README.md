@@ -21,7 +21,6 @@ A **user preference** is a configuration setting which allows a user to configur
 
 - Docker
 - Java
-- Flyway
 
 Build and test:
 
