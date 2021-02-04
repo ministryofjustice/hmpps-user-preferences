@@ -22,7 +22,7 @@ class UsersRepositoryTest @Autowired constructor(
 
   @Test
   fun `Can create a new user with courts`() {
-    val newUser = Users(testUuid, listOf("B10JQ", "B62DC"))
+    val newUser = Users(testUuid, hashMapOf("courts" to "B10JQ, B62DC"))
     entityManager.persist(newUser)
     entityManager.flush()
 
@@ -32,7 +32,7 @@ class UsersRepositoryTest @Autowired constructor(
 
   @Test
   fun `Can update user with empty court list`() {
-    val newUser = Users(testUuid, listOf())
+    val newUser = Users(testUuid, hashMapOf())
     entityManager.persist(newUser)
     entityManager.flush()
 

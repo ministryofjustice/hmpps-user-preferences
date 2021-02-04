@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import uk.gov.justice.digital.hmpps.hmppsuserpreferences.dto.CourtsDTO
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Users
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.repository.UsersRepository
 import java.util.UUID
@@ -26,7 +27,7 @@ class CourtsControllerTest {
 
   lateinit var mvc: MockMvc
   lateinit var testUuid: UUID
-  lateinit var user: Users
+  lateinit var users: Users
 
   @InjectMocks
   lateinit var controller: CourtsController
@@ -38,11 +39,11 @@ class CourtsControllerTest {
   fun setup() {
     MockitoAnnotations.openMocks(this)
     testUuid = UUID.randomUUID()
-    user = Users(testUuid, listOf("", ""))
+    users = Users(testUuid, hashMapOf("courts" to "B10JQ, B62DC"))
     mvc = MockMvcBuilders.standaloneSetup(controller)
       .setMessageConverters(MappingJackson2HttpMessageConverter())
       .build()
-    whenever(respository.save(any())).thenReturn(user)
+    whenever(respository.save(any())).thenReturn(users)
   }
 
   @AfterEach
@@ -52,7 +53,8 @@ class CourtsControllerTest {
 
   @Test
   fun `PUT courts returns created`() {
-    val jsonData = jacksonObjectMapper().writeValueAsString(user)
+    val courts = CourtsDTO(listOf("B10JQ", "B62DC"))
+    val jsonData = jacksonObjectMapper().writeValueAsString(courts)
     mvc.perform(
       MockMvcRequestBuilders.put("/users/$testUuid/preferences/courts")
         .contentType(MediaType.APPLICATION_JSON)
