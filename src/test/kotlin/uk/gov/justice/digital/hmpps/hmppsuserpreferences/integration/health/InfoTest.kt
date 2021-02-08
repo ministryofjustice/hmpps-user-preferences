@@ -28,13 +28,4 @@ class InfoTest : IntegrationTestBase() {
         assertThat(it).startsWith(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE))
       }
   }
-
-  @Test
-  fun `GET courts endpoint`() {
-    webTestClient.get().uri("/users/USERNAME/preferences/courts")
-      .exchange()
-      .expectStatus().isOk
-      .expectBody()
-      .jsonPath("courts").isEqualTo("B10JQ")
-  }
 }
