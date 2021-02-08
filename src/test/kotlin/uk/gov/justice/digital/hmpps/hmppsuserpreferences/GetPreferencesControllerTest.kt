@@ -1,20 +1,39 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences
 
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.Test
+import org.mockito.Mock
+import org.springframework.boot.test.mock.mockito.MockBean
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
+import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.UsersService
+import java.util.*
+import java.util.Arrays.asList
 
 class GetPreferencesControllerTest : IntegrationTestBase() {
 
+  private val courtKey: String = "courts"
+  private val userId: String = "userid"
+
+  private val prefsPath: String = "/users/%s/preferences/%s"
+
+  @MockBean
+  lateinit var usersService: UsersService
+
   @Test
   fun `GET courts endpoint`() {
-    val equalTo = webTestClient.get().uri("/users/USERNAME/preferences/courts")
+
+    whenever(usersService.getPreferenceValues(userId, courtKey)).thenReturn(asList("B10JQ", "C20RE"))
+
+    webTestClient.get().uri(String.format(prefsPath, userId, courtKey))
       .exchange()
       .expectStatus().isOk
       .expectBody()
-      .jsonPath("courts").isArray
+      .jsonPath("$.courts.size()").isEqualTo(2)
       .jsonPath("courts[0]").isEqualTo("B10JQ")
-//      .assertThat(Array).isEqualTo("['B10JQ', 'B62DC', 'B10BD']")
-//      .assertTrue(Arrays.equals(['B10JQ', 'B62DC', 'B10BD'], ['B10JQ', 'B62DC', 'B10BD']))
+      .jsonPath("courts[1]").isEqualTo("C20RE")
+//      .expectBody(String::class.java)
+//      .returnResult()
+//      .responseBody
   }
 
 //  @Test
@@ -43,22 +62,22 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
 //      .jsonPath("courts").isArray()
 //  }
 
-  @Test
-  fun whenGetCourts_thenReturnListSorted() {
-    given()
-      .auth()
-      .oauth2(getToken())
-      .`when`()
-      .get("/courts")
-      .then()
-      .assertThat()
-      .statusCode(200)
-      .body("courts", hasSize(3))
-      .body("courts[0].code", equalTo("B63AD"))
-      .body("courts[0].name", equalTo("Aberystwyth"))
-      .body("courts[1].code", equalTo("B33HU"))
-      .body("courts[1].name", equalTo("Leicester"))
-      .body("courts[2].code", equalTo("B10JQ"))
-      .body("courts[2].name", equalTo("North Shields"))
-  }
+//  @Test
+//  fun whenGetCourts_thenReturnListSorted() {
+//    given()
+//      .auth()
+//      .oauth2(getToken())
+//      .`when`()
+//      .get("/courts")
+//      .then()
+//      .assertThat()
+//      .statusCode(200)
+//      .body("courts", hasSize(3))
+//      .body("courts[0].code", equalTo("B63AD"))
+//      .body("courts[0].name", equalTo("Aberystwyth"))
+//      .body("courts[1].code", equalTo("B33HU"))
+//      .body("courts[1].name", equalTo("Leicester"))
+//      .body("courts[2].code", equalTo("B10JQ"))
+//      .body("courts[2].name", equalTo("North Shields"))
+//  }
 }
