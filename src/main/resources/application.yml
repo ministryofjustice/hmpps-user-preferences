@@ -13,6 +13,13 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${hmppsauth.baseurl}/issuer
+          jwk-set-uri: ${hmppsauth.baseurl}/.well-known/jwks.json
+
   database:
     schema:
       name: hmppsuserpreferences
@@ -28,6 +35,9 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+hmpps-auth:
+  baseurl: http://localhost:8090/auth
 
 
 server:

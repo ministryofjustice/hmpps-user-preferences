@@ -18,6 +18,7 @@ ingress:
 
 env:
   JAVA_OPTS: "-Xmx512m"
+  HMPPSAUTH_BASEURL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
 
 whitelist:
   office: "217.33.148.210/32"

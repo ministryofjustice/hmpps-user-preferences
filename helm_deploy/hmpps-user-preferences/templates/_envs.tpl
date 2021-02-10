@@ -13,6 +13,9 @@ env:
   - name: SPRING_PROFILES_ACTIVE
     value: "logstash"
 
+  - name: HMPPSAUTH_BASEURL
+    value: "{{ .Values.env.HMPPSAUTH_BASEURL }}"
+
   - name: APPLICATION_INSIGHTS_IKEY
     valueFrom:
       secretKeyRef:
