@@ -18,7 +18,7 @@ services:
     image: circleci/postgres:11.6-alpine-ram
     container_name: postgres
     ports:
-      - "5433:5433"
+      - "5432:5432"
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: dev
