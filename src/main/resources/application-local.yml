@@ -1,6 +1,9 @@
 notify:
   enabled: false
 
+hmpps-auth:
+  baseurl: http://localhost:8090/auth
+
 postgres:
   uri: localhost:5432
   db: preferences
