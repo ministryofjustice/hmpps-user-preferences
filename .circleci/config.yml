@@ -109,6 +109,6 @@ workflows:
           name: vulnerability_scan_and_monitor
           monitor: true
           <<: *snyk_options
-            - hmpps/build_docker:
-                publish: false
-                <<: *snyk_options
+      - hmpps/build_docker:
+          publish: false
+          <<: *snyk_options
