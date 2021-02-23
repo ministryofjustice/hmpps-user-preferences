@@ -1,8 +1,13 @@
 version: 2.1
 
 orbs:
-  owasp: entur/owasp@0.0.10
   hmpps: ministryofjustice/hmpps@2.2
+  snyk: snyk/snyk@0.0.12
+
+_snyk_options: &snyk_options
+  snyk-scan: true
+  snyk-fail-build: true
+  snyk-args: --policy-path=.snyk --configuration-matching='^((?!test).)*$'
 
 jobs:
   validate:
@@ -32,6 +37,28 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
+
+  vulnerability_scan:
+    executor: hmpps/java
+    parameters:
+      monitor:
+        type: boolean
+        default: false
+      snyk-scan:
+        type: boolean
+      snyk-fail-build:
+        type: boolean
+      snyk-args:
+        type: string
+    steps:
+      - checkout
+      - snyk/scan:
+          project: '${CIRCLE_PROJECT_REPONAME}'
+          monitor-on-build: << parameters.monitor >>
+          organization: "digital-probation-services"
+          severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
+          fail-on-issues: << parameters.snyk-fail-build >>
+          additional-arguments: << parameters.snyk-args >>
 
 workflows:
   version: 2
@@ -100,5 +127,10 @@ workflows:
               only:
                 - main
     jobs:
-      - owasp/gradle_owasp_dependency_check:
-          executor: hmpps/java
+      - vulnerability_scan:
+          name: vulnerability_scan_and_monitor
+          monitor: true
+          <<: *snyk_options
+      - hmpps/build_docker:
+          publish: false
+          <<: *snyk_options
