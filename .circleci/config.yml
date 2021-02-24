@@ -5,9 +5,10 @@ orbs:
   snyk: snyk/snyk@0.0.12
 
 _snyk_options: &snyk_options
-  snyk-scan: true
-  snyk-fail-build: true
-  snyk-args: --policy-path=.snyk --configuration-matching='^((?!test).)*$'
+  organization: "digital-probation-services"
+  severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
+  fail-on-issues: true
+  additional-arguments: "--policy-path=.snyk"
 
 jobs:
   validate:
@@ -53,12 +54,9 @@ jobs:
     steps:
       - checkout
       - snyk/scan:
-          project: '${CIRCLE_PROJECT_REPONAME}'
-          monitor-on-build: << parameters.monitor >>
-          organization: "digital-probation-services"
-          severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
-          fail-on-issues: << parameters.snyk-fail-build >>
-          additional-arguments: << parameters.snyk-args >>
+          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}'
+            monitor-on-build: << parameters.main >>
+            <<: *snyk_options
 
 workflows:
   version: 2
