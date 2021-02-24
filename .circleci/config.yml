@@ -55,8 +55,8 @@ jobs:
       - checkout
       - snyk/scan:
           project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}'
-            monitor-on-build: << parameters.main >>
-            <<: *snyk_options
+          monitor-on-build: << parameters.main >>
+          <<: *snyk_options
 
 workflows:
   version: 2
