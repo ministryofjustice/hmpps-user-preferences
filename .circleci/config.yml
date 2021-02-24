@@ -42,15 +42,9 @@ jobs:
   vulnerability_scan:
     executor: hmpps/java
     parameters:
-      monitor:
+      main:
         type: boolean
         default: false
-      snyk-scan:
-        type: boolean
-      snyk-fail-build:
-        type: boolean
-      snyk-args:
-        type: string
     steps:
       - checkout
       - snyk/scan:
