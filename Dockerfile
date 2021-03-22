@@ -7,7 +7,7 @@ WORKDIR /app
 ADD . .
 RUN ./gradlew clean assemble -Dorg.gradle.daemon=false
 
-FROM openjdk:11-slim
+FROM adoptopenjdk/openjdk11:alpine-jre
 LABEL maintainer="HMPPS Digital Studio <info@digital.justice.gov.uk>"
 
 RUN apt-get update && \
