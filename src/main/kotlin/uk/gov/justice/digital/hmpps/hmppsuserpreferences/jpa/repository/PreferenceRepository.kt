@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
 
 @Repository
-interface PreferenceRepository : CrudRepository<Preference, Long>
+interface PreferenceRepository : CrudRepository<Preference, Long> {
+  fun findByHmppsUserIdAndName(userId: String, preferenceName: String): List<Preference>
+}

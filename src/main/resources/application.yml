@@ -32,15 +32,15 @@ spring:
     hibernate:
       ddl-auto: validate
 
-  # Uncomment the following lines to generate create.sql on build
-    properties:
-      javax:
-        persistence:
-          schema-generation:
-            scripts:
-              create-target: create.sql
-              action: create
-              create-source: metadata
+# Uncomment the following lines to generate create.sql on build
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            scripts:
+#              create-target: create.sql
+#              action: create
+#              create-source: metadata
 
 server:
   port: 8080

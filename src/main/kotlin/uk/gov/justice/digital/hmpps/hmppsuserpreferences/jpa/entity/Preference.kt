@@ -10,10 +10,6 @@ import javax.persistence.Table
 @Entity
 @Table(name = "preference")
 data class Preference(
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  val id: Long,
-
   @Column(nullable = false)
   val hmppsUserId: String,
 
@@ -21,5 +17,9 @@ data class Preference(
   val name: String,
 
   @Column(nullable = false)
-  val value: String
+  val value: String,
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  val id: Long = 0L
 )
