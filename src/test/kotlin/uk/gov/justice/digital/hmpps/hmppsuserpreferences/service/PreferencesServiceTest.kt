@@ -17,7 +17,6 @@ class PreferencesServiceTest {
   @Mock
   lateinit var preferenceRepository: PreferenceRepository
 
-
   @InjectMocks
   lateinit var preferenceService: PreferencesService
 
@@ -45,7 +44,7 @@ class PreferencesServiceTest {
   }
 
   @Test
-  fun `Get preferences should retrieve existing preferences` () {
+  fun `Get preferences should retrieve existing preferences`() {
     whenever(preferenceRepository.findByHmppsUserIdAndName("user_id", "preference_name"))
       .thenReturn(preferencesList)
 

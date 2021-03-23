@@ -17,9 +17,9 @@ data class Preference(
   val name: String,
 
   @Column(nullable = false)
-  val value: String,
-
+  val value: String
+) {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   val id: Long = 0L
-)
+}

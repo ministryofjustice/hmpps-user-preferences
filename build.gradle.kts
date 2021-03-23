@@ -2,6 +2,7 @@ plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.1.1"
   kotlin("plugin.spring") version "1.4.10"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.4.21"
+  id("org.flywaydb.flyway") version "6.5.5"
 }
 
 configurations {
@@ -20,5 +21,5 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-52:2.10.2")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
-  testImplementation("com.h2database:h2:1.4.200")
+  implementation("com.h2database:h2:1.4.200")
 }

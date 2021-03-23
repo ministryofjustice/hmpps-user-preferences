@@ -2,11 +2,10 @@ info.app:
   name: Hmpps User Preferences
   version: 1.0
 
-database:
-  schema:
-    name: hmppsuserpreferences
 
 spring:
+  profiles:
+    active: h2,dev
   application:
     name: hmpps-user-preferences
   codec:
@@ -24,13 +23,12 @@ spring:
           issuer-uri: ${hmppsauth.baseurl}/issuer
           jwk-set-uri: ${hmppsauth.baseurl}/.well-known/jwks.json
 
-  datasource:
-    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
-
   jpa:
     show-sql: false
     hibernate:
       ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration,classpath:db/local
 
 # Uncomment the following lines to generate create.sql on build
 #    properties:

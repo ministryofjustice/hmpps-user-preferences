@@ -1,7 +1,0 @@
-spring:
-  flyway:
-    enabled: false
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: validate

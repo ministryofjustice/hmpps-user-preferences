@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.service
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.controller.PreferencesDTO
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
@@ -8,6 +9,7 @@ import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.repository.Preferen
 @Service
 class PreferencesService {
 
+  @Autowired
   lateinit var preferenceRepository: PreferenceRepository
 
   fun getPreferences(userId: String, preferenceName: String): PreferencesDTO {
