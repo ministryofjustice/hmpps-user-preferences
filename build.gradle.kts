@@ -20,4 +20,5 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-52:2.10.2")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
+  testImplementation("com.h2database:h2:1.4.200")
 }

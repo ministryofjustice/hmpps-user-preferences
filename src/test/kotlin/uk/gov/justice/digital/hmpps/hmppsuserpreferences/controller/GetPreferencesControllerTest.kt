@@ -27,6 +27,8 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
   @Test
   fun `GET preferences endpoint returns existing preferences`() {
 
+    // TODO: Remove these mocks and have it call the actual service
+
     whenever(usersService.getPreferences(userId, courtKey)).thenReturn(outputPreferences)
 
     webTestClient.get().uri(String.format(prefsPath, userId, courtKey))
@@ -44,6 +46,8 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
 
   @Test
   fun `PUT preferences endpoint creates preferences`() {
+
+    // TODO: Remove these mocks and have it call the actual service
     whenever(usersService.putPreferences(userId, courtKey, inputPreferences)).thenReturn(outputPreferences)
 
     webTestClient.put().uri(String.format(prefsPath, userId, courtKey))
