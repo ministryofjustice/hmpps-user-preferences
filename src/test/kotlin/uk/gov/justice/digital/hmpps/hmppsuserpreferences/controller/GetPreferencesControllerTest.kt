@@ -8,7 +8,7 @@ import org.mockito.Mockito.verify
 import org.springframework.boot.test.mock.mockito.MockBean
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.TEST_TOKEN
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
-import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.UsersService
+import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.PreferencesService
 
 class GetPreferencesControllerTest : IntegrationTestBase() {
   private val courtKey: String = "courts"
@@ -18,7 +18,7 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
   private val prefsPath: String = "/users/%s/preferences/%s"
 
   @MockBean
-  lateinit var usersService: UsersService
+  lateinit var preferencesService: PreferencesService
 
   var inputPreferences = PreferencesDTO(courts)
 
@@ -29,7 +29,7 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
 
     // TODO: Remove these mocks and have it call the actual service
 
-    whenever(usersService.getPreferences(userId, courtKey)).thenReturn(outputPreferences)
+    whenever(preferencesService.getPreferences(userId, courtKey)).thenReturn(outputPreferences)
 
     webTestClient.get().uri(String.format(prefsPath, userId, courtKey))
       .header(HttpHeaders.AUTHORIZATION, TEST_TOKEN)
@@ -40,15 +40,15 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
       .jsonPath("items[0]").isEqualTo("B10JQ")
       .jsonPath("items[1]").isEqualTo("C20RE")
 
-    verify(usersService).getPreferences(userId, courtKey)
-    verifyNoMoreInteractions(usersService)
+    verify(preferencesService).getPreferences(userId, courtKey)
+    verifyNoMoreInteractions(preferencesService)
   }
 
   @Test
   fun `PUT preferences endpoint creates preferences`() {
 
     // TODO: Remove these mocks and have it call the actual service
-    whenever(usersService.putPreferences(userId, courtKey, inputPreferences)).thenReturn(outputPreferences)
+    whenever(preferencesService.putPreferences(userId, courtKey, inputPreferences)).thenReturn(outputPreferences)
 
     webTestClient.put().uri(String.format(prefsPath, userId, courtKey))
       .bodyValue(inputPreferences)
@@ -60,7 +60,7 @@ class GetPreferencesControllerTest : IntegrationTestBase() {
       .jsonPath("items[0]").isEqualTo("B10JQ")
       .jsonPath("items[1]").isEqualTo("C20RE")
 
-    verify(usersService).putPreferences(userId, courtKey, inputPreferences)
-    verifyNoMoreInteractions(usersService)
+    verify(preferencesService).putPreferences(userId, courtKey, inputPreferences)
+    verifyNoMoreInteractions(preferencesService)
   }
 }

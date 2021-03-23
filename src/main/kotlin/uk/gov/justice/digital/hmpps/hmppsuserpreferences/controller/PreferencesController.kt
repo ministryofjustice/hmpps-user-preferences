@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.UsersService
+import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.PreferencesService
 
 data class PreferencesDTO(
   val items: List<String>
@@ -18,14 +18,14 @@ data class PreferencesDTO(
 @RestController
 class PreferencesController {
   @Autowired
-  lateinit var usersService: UsersService
+  lateinit var preferencesService: PreferencesService
 
   @GetMapping(
     value = ["/users/{userId}/preferences/{preferenceId}"],
     produces = [APPLICATION_JSON_VALUE]
   )
   fun getPreferences(@PathVariable userId: String, @PathVariable preferenceId: String): PreferencesDTO {
-    return usersService.getPreferences(userId, preferenceId)
+    return preferencesService.getPreferences(userId, preferenceId)
   }
 
   @ResponseStatus(value = HttpStatus.CREATED)
@@ -35,6 +35,6 @@ class PreferencesController {
     @PathVariable preferenceId: String,
     @RequestBody preferences: PreferencesDTO
   ): PreferencesDTO {
-    return usersService.putPreferences(userId, preferenceId, preferences)
+    return preferencesService.putPreferences(userId, preferenceId, preferences)
   }
 }
