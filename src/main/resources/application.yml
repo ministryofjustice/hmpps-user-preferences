@@ -2,7 +2,10 @@ info.app:
   name: Hmpps User Preferences
   version: 1.0
 
+
 spring:
+  profiles:
+    active: h2,dev
   application:
     name: hmpps-user-preferences
   codec:
@@ -20,25 +23,22 @@ spring:
           issuer-uri: ${hmppsauth.baseurl}/issuer
           jwk-set-uri: ${hmppsauth.baseurl}/.well-known/jwks.json
 
-  database:
-    schema:
-      name: hmppsuserpreferences
-
-  datasource:
-    url: jdbc:postgresql://${database.endpoint:localhost:5432}/${database.name:postgres}?currentSchema=${database.schema.name}&user=${database.username:root}&password=${database.password:dev}&stringtype=unspecified
-
-
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration,classpath:db/local
 
-hmpps-auth:
-  baseurl: http://localhost:8090/auth
-
+# Uncomment the following lines to generate create.sql on build
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            scripts:
+#              create-target: create.sql
+#              action: create
+#              create-source: metadata
 
 server:
   port: 8080

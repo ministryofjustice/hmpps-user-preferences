@@ -1,4 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.config
+
 import com.nimbusds.jwt.JWTParser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -22,7 +23,17 @@ class ResourceServerConfiguration : WebSecurityConfigurerAdapter() {
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and().csrf().disable()
       .authorizeRequests {
-        it.antMatchers("/health/**", "/info").permitAll()
+        it.antMatchers(
+          "/health/**",
+          "/info",
+          "/health",
+          "/ping",
+          "/swagger-resources/**",
+          "/v2/api-docs",
+          "/swagger-ui.html",
+          "/swagger-ui/**",
+          "/webjars/springfox-swagger-ui/**"
+        ).permitAll()
         it.anyRequest().authenticated()
       }
       .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter())
