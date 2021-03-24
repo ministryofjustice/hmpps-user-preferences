@@ -21,5 +21,7 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-52:2.10.2")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
-  implementation("com.h2database:h2:1.4.200")
+  runtimeOnly("com.h2database:h2:1.4.200")
+
+  implementation("io.springfox:springfox-boot-starter:3.0.0")
 }

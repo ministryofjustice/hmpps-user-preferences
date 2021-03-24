@@ -1,6 +1,7 @@
 # HMPPS User Preferences
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/hmpps-user-preferences.svg?style=svg)](https://circleci.com/gh/ministryofjustice/hmpps-user-preferences)
+[![Swagger API docs (needs VPN)](https://img.shields.io/badge/API_docs_(needs_VPN)-view-85EA2D.svg?logo=swagger)](https://hmpps-user-preferences.hmpps.service.justice.gov.uk/swagger-ui.html#)
 
 An API to store and retrieve an **HMPPS Users**' preferences where an **HMPPS User** is a user authenticated
 by [HMPPS Auth](https://github.com/ministryofjustice/hmpps-auth).
