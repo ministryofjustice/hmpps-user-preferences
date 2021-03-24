@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsuserpreferences.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.controller.PreferencesDTO
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.repository.PreferenceRepository
@@ -17,10 +18,12 @@ class PreferencesService {
     return PreferencesDTO(preferences.map { preference -> preference.value })
   }
 
+  @Transactional
   fun putPreferences(userId: String, preferenceName: String, preferencesDto: PreferencesDTO): PreferencesDTO {
     val preferences = preferencesDto.items
       .map { item -> Preference(userId, preferenceName, item) }
 
+    preferenceRepository.deleteAll(preferenceRepository.findByHmppsUserIdAndName(userId, preferenceName))
     preferenceRepository.saveAll(preferences)
     return preferencesDto
   }

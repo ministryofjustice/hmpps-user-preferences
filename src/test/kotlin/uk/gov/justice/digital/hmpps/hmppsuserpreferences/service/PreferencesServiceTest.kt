@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.service
 
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
@@ -35,9 +36,30 @@ class PreferencesServiceTest {
         preferencesList
       )
     ).thenReturn(preferencesList)
+    whenever(preferenceRepository.findByHmppsUserIdAndName("user_id", "preference_name"))
+      .thenReturn(emptyList())
 
     val savedPreferences = preferenceService.putPreferences("user_id", "preference_name", preferencesDTO)
 
+    verify(preferenceRepository).deleteAll(emptyList())
+    verifyNoMoreInteractions(preferenceRepository)
+
+    assertThat(savedPreferences).isEqualTo(preferencesDTO)
+  }
+
+  @Test
+  fun `Put preferences should overwrite existing preferences and return DTO`() {
+    whenever(
+      preferenceRepository.saveAll(
+        preferencesList
+      )
+    ).thenReturn(preferencesList)
+    whenever(preferenceRepository.findByHmppsUserIdAndName("user_id", "preference_name"))
+      .thenReturn(preferencesList)
+
+    val savedPreferences = preferenceService.putPreferences("user_id", "preference_name", preferencesDTO)
+
+    verify(preferenceRepository).deleteAll(preferencesList)
     verifyNoMoreInteractions(preferenceRepository)
 
     assertThat(savedPreferences).isEqualTo(preferencesDTO)

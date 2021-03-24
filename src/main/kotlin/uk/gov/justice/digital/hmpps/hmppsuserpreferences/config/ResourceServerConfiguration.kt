@@ -1,4 +1,5 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.config
+
 import com.nimbusds.jwt.JWTParser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

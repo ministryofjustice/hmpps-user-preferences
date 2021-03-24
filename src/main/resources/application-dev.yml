@@ -1,2 +1,2 @@
 hmpps-auth:
-  baseurl: https://sign-in-dev.hmpps.service.justice.gov.uk
+  baseurl: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
