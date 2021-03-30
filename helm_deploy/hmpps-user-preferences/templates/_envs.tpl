@@ -11,7 +11,7 @@ env:
     value: "{{ .Values.env.JAVA_OPTS }}"
 
   - name: SPRING_PROFILES_ACTIVE
-    value: "logstash"
+    value: "logstash,postgres"
 
   - name: HMPPSAUTH_BASEURL
     value: "{{ .Values.env.HMPPSAUTH_BASEURL }}"
