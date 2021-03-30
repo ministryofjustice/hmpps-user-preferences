@@ -4,8 +4,6 @@ info.app:
 
 
 spring:
-  profiles:
-    active: h2,dev
   application:
     name: hmpps-user-preferences
   codec:

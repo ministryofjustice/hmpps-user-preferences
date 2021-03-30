@@ -36,7 +36,7 @@ Build and test:
 Run with in-memory database against dev auth:
 
 ```
-./gradlew bootRun
+SPRING_PROFILES_ACTIVE=h2,dev ./gradlew bootRun
 ```
 
 Run with Dockerised Postgres database against dev auth:
