@@ -18,6 +18,9 @@ class PreferencesServiceTest {
   @Mock
   lateinit var preferenceRepository: PreferenceRepository
 
+  @Mock
+  lateinit var telemetryService: TelemetryService
+
   @InjectMocks
   lateinit var preferenceService: PreferencesService
 
@@ -42,7 +45,8 @@ class PreferencesServiceTest {
     val savedPreferences = preferenceService.putPreferences("user_id", "preference_name", preferencesDTO)
 
     verify(preferenceRepository).deleteAll(emptyList())
-    verifyNoMoreInteractions(preferenceRepository)
+    verify(telemetryService).trackEvent(TelemetryEventType.PREFERENCES_UPDATED, "user_id", "preference_name", preferencesDTO.items)
+    verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
     assertThat(savedPreferences).isEqualTo(preferencesDTO)
   }
@@ -60,7 +64,9 @@ class PreferencesServiceTest {
     val savedPreferences = preferenceService.putPreferences("user_id", "preference_name", preferencesDTO)
 
     verify(preferenceRepository).deleteAll(preferencesList)
-    verifyNoMoreInteractions(preferenceRepository)
+    verify(preferenceRepository).saveAll(preferencesList)
+    verify(telemetryService).trackEvent(TelemetryEventType.PREFERENCES_UPDATED, "user_id", "preference_name", preferencesDTO.items)
+    verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
     assertThat(savedPreferences).isEqualTo(preferencesDTO)
   }

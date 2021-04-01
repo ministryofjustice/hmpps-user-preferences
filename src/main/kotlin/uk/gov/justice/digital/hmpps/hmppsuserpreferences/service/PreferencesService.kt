@@ -13,6 +13,9 @@ class PreferencesService {
   @Autowired
   lateinit var preferenceRepository: PreferenceRepository
 
+  @Autowired
+  lateinit var telemetryService: TelemetryService
+
   fun getPreferences(userId: String, preferenceName: String): PreferencesDTO {
     val preferences = preferenceRepository.findByHmppsUserIdAndName(userId, preferenceName)
     return PreferencesDTO(preferences.map { preference -> preference.value })
@@ -25,6 +28,7 @@ class PreferencesService {
 
     preferenceRepository.deleteAll(preferenceRepository.findByHmppsUserIdAndName(userId, preferenceName))
     preferenceRepository.saveAll(preferences)
+    telemetryService.trackEvent(TelemetryEventType.PREFERENCES_UPDATED, userId, preferenceName, preferencesDto.items)
     return preferencesDto
   }
 }
