@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ template "app.fullname" . }}
   labels:
-    {{- include "app.labels" . | nindent 4 }}
+  {{- include "app.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 2
@@ -15,11 +15,11 @@ spec:
       maxUnavailable: 50%
   selector:
     matchLabels:
-      {{- include "app.selectorLabels" . | nindent 6 }}
+  {{- include "app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "app.selectorLabels" . | nindent 8 }}
+    {{- include "app.selectorLabels" . | nindent 8 }}
     spec:
       affinity:
         podAntiAffinity:
@@ -55,4 +55,13 @@ spec:
             initialDelaySeconds: 60
             timeoutSeconds: 30
             failureThreshold: 15
+          {{ if .Values.resources }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.cpu.limit }}
+              memory: {{ .Values.resources.memory.limit }}
+            requests:
+              cpu: {{ .Values.resources.cpu.request}}
+              memory: {{ .Values.resources.memory.request }}
+  {{ end }}
   {{ include "deployment.envs" . | nindent 10 }}
