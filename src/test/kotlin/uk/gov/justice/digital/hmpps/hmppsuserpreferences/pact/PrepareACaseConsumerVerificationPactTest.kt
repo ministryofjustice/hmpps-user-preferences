@@ -2,7 +2,7 @@ package uk.gov.justice.digital.hmpps.hmppsuserpreferences.pact
 
 import au.com.dius.pact.provider.junit.Provider
 import au.com.dius.pact.provider.junit.State
-import au.com.dius.pact.provider.junit.loader.PactFolder
+import au.com.dius.pact.provider.junit.loader.PactBroker
 import au.com.dius.pact.provider.junit5.PactVerificationContext
 import au.com.dius.pact.provider.spring.junit5.PactVerificationSpringProvider
 import org.junit.jupiter.api.TestTemplate
@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
 
 @Provider("User preferences service")
-@PactFolder("pact")
+@PactBroker
 @ActiveProfiles("test")
 class PrepareACaseConsumerVerificationPactTest : IntegrationTestBase() {
 
