@@ -1,0 +1,174 @@
+{
+  "consumer": {
+    "name": "Prepare a case"
+  },
+  "provider": {
+    "name": "User preferences service"
+  },
+  "interactions": [
+    {
+      "_id": "8270639ab5c78a207fc69d17cf1eb7cb7380c780",
+      "description": "a request to update a the user preferences with their chosen courts",
+      "providerState": "a user has selected relevant courts",
+      "request": {
+        "method": "PUT",
+        "path": "/users/testuser/preferences/courts",
+        "body": {
+          "items": [
+            "B14LO"
+          ]
+        },
+        "headers": {
+          "Accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRldi1qd2sta2lkIn0.eyJzdWIiOiJ0ZXN0dXNlciIsInVzZXJfaWQiOiIyNTAwMDgzMDU3IiwidXNlcl9uYW1lIjoidGVzdHVzZXIiLCJzY29wZSI6WyJyZWFkIl0sImF1dGhfc291cmNlIjoiZGVsaXVzIiwiaXNzIjoiaHR0cHM6Ly9zaWduLWluLWRldi5obXBwcy5zZXJ2aWNlLmp1c3RpY2UuZ292LnVrL2F1dGgvaXNzdWVyIiwiZXhwIjoxNjEzMzg3NjY0LCJhdXRob3JpdGllcyI6WyJST0xFX1BSRVBBUkVfQV9DQVNFIiwiUk9MRV9QUk9CQVRJT04iXSwianRpIjoiX2ktMnJ4RGZOem81VmtpQ0twYkk5WTRQcWdzIiwiY2xpZW50X2lkIjoicHJlcGFyZS1hLWNhc2UtZm9yLWNvdXJ0In0.signature_not_verified"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "items": [
+            "B14LO"
+          ]
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "_id": "9d34c7c7728bfec6c37e3f721edbab978c680de4",
+      "description": "a request for the user preferences with their chosen courts",
+      "providerState": "a user has selected relevant courts",
+      "request": {
+        "method": "GET",
+        "path": "/users/testuser/preferences/courts",
+        "headers": {
+          "Accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRldi1qd2sta2lkIn0.eyJzdWIiOiJ0ZXN0dXNlciIsInVzZXJfaWQiOiIyNTAwMDgzMDU3IiwidXNlcl9uYW1lIjoidGVzdHVzZXIiLCJzY29wZSI6WyJyZWFkIl0sImF1dGhfc291cmNlIjoiZGVsaXVzIiwiaXNzIjoiaHR0cHM6Ly9zaWduLWluLWRldi5obXBwcy5zZXJ2aWNlLmp1c3RpY2UuZ292LnVrL2F1dGgvaXNzdWVyIiwiZXhwIjoxNjEzMzg3NjY0LCJhdXRob3JpdGllcyI6WyJST0xFX1BSRVBBUkVfQV9DQVNFIiwiUk9MRV9QUk9CQVRJT04iXSwianRpIjoiX2ktMnJ4RGZOem81VmtpQ0twYkk5WTRQcWdzIiwiY2xpZW50X2lkIjoicHJlcGFyZS1hLWNhc2UtZm9yLWNvdXJ0In0.signature_not_verified"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "items": [
+            "B14LO"
+          ]
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "value"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  },
+  "createdAt": "2021-04-09T08:10:15+00:00",
+  "_links": {
+    "self": {
+      "title": "Pact",
+      "name": "Pact between Prepare a case (2021-04-09.8224) and User preferences service",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/version/2021-04-09.8224"
+    },
+    "pb:consumer": {
+      "title": "Consumer",
+      "name": "Prepare a case",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacticipants/Prepare%20a%20case"
+    },
+    "pb:consumer-version": {
+      "title": "Consumer version",
+      "name": "2021-04-09.8224",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacticipants/Prepare%20a%20case/versions/2021-04-09.8224"
+    },
+    "pb:provider": {
+      "title": "Provider",
+      "name": "User preferences service",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacticipants/User%20preferences%20service"
+    },
+    "pb:pact-version": {
+      "title": "Pact content version permalink",
+      "name": "77c26f6d4a3800262bdeb3ecdf61286dc26799ed",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/pact-version/77c26f6d4a3800262bdeb3ecdf61286dc26799ed"
+    },
+    "pb:latest-pact-version": {
+      "title": "Latest version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/latest"
+    },
+    "pb:all-pact-versions": {
+      "title": "All versions of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/versions"
+    },
+    "pb:latest-untagged-pact-version": {
+      "title": "Latest untagged version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/latest-untagged"
+    },
+    "pb:latest-tagged-pact-version": {
+      "title": "Latest tagged version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/latest/{tag}",
+      "templated": true
+    },
+    "pb:previous-distinct": {
+      "title": "Previous distinct version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/version/2021-04-09.8224/previous-distinct"
+    },
+    "pb:diff-previous-distinct": {
+      "title": "Diff with previous distinct version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/version/2021-04-09.8224/diff/previous-distinct"
+    },
+    "pb:diff": {
+      "title": "Diff with another specified version of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/pact-version/77c26f6d4a3800262bdeb3ecdf61286dc26799ed/diff/pact-version/{pactVersion}",
+      "templated": true
+    },
+    "pb:pact-webhooks": {
+      "title": "Webhooks for the pact between Prepare a case and User preferences service",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/webhooks/provider/User%20preferences%20service/consumer/Prepare%20a%20case"
+    },
+    "pb:consumer-webhooks": {
+      "title": "Webhooks for all pacts with provider User preferences service",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/webhooks/consumer/User%20preferences%20service"
+    },
+    "pb:tag-prod-version": {
+      "title": "PUT to this resource to tag this consumer version as 'production'",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacticipants/Prepare%20a%20case/versions/2021-04-09.8224/tags/prod"
+    },
+    "pb:tag-version": {
+      "title": "PUT to this resource to tag this consumer version",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacticipants/Prepare%20a%20case/versions/2021-04-09.8224/tags/{tag}"
+    },
+    "pb:publish-verification-results": {
+      "title": "Publish verification results",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/pact-version/77c26f6d4a3800262bdeb3ecdf61286dc26799ed/verification-results"
+    },
+    "pb:latest-verification-results": {
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/pact-version/77c26f6d4a3800262bdeb3ecdf61286dc26799ed/verification-results/latest"
+    },
+    "pb:triggered-webhooks": {
+      "title": "Webhooks triggered by the publication of this pact",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/pacts/provider/User%20preferences%20service/consumer/Prepare%20a%20case/version/2021-04-09.8224/triggered-webhooks"
+    },
+    "pb:matrix-for-consumer-version": {
+      "title": "View matrix rows for the consumer version to which this pact belongs",
+      "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/matrix?q[][pacticipant]=Prepare+a+case&q[][version]=2021-04-09.8224&latestby=cvpv"
+    },
+    "curies": [
+      {
+        "name": "pb",
+        "href": "https://pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk/doc/{rel}?context=pact",
+        "templated": true
+      }
+    ]
+  }
+}

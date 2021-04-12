@@ -7,3 +7,10 @@ management.endpoint:
 spring:
   datasource:
     url: 'jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE'
+
+
+pactbroker:
+  host: pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk
+  scheme: https
+  consumerversionselectors:
+    tags: main

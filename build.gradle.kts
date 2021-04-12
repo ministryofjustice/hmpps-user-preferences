@@ -24,4 +24,9 @@ dependencies {
   runtimeOnly("com.h2database:h2:1.4.200")
 
   implementation("io.springfox:springfox-boot-starter:3.0.0")
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.2.2")
+
+  testImplementation("au.com.dius:pact-jvm-provider-junit5:4.0.10") {
+    exclude("junit", "junit")
+  }
 }
