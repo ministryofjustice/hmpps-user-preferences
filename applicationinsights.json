@@ -1,0 +1,9 @@
+{
+  "role": {
+    "name": "hmpps-user-preferences",
+    "instance": "hmpps-user-preferences"
+  },
+  "heartbeat": {
+    "intervalSeconds": 15
+  }
+}
