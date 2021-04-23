@@ -16,7 +16,7 @@ env:
   - name: HMPPSAUTH_BASEURL
     value: "{{ .Values.env.HMPPSAUTH_BASEURL }}"
 
-  - name: APPLICATION_INSIGHTS_IKEY
+  - name: APPINSIGHTS_INSTRUMENTATIONKEY
     valueFrom:
       secretKeyRef:
         name: hmpps-user-preferences-secrets
