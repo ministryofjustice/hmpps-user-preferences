@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
 
-@Provider("User preferences service")
+@Provider("hmpps-user-preferences")
 @PactBroker
 @ActiveProfiles("test")
 class PrepareACaseConsumerVerificationPactTest : IntegrationTestBase() {
