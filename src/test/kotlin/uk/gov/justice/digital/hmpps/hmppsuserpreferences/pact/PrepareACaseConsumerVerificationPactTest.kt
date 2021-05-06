@@ -12,7 +12,7 @@ import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.Integration
 
 @Provider("hmpps-user-preferences")
 @PactBroker
-@ActiveProfiles("test")
+@ActiveProfiles("test", "unsecured")
 class PrepareACaseConsumerVerificationPactTest : IntegrationTestBase() {
 
   @TestTemplate
