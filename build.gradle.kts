@@ -1,8 +1,8 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.1.7"
-  kotlin("plugin.spring") version "1.4.32"
+  kotlin("plugin.spring") version "1.5.0"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.5.0"
-  id("org.flywaydb.flyway") version "7.8.1"
+  id("org.flywaydb.flyway") version "7.8.2"
 }
 val pactVersion = "4.2.2"
 
@@ -39,7 +39,7 @@ dependencies {
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("org.hibernate:hibernate-core:5.4.30.Final")
+  implementation("org.hibernate:hibernate-core:5.4.31.Final")
   implementation("com.vladmihalcea:hibernate-types-52:2.10.4")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
