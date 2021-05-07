@@ -1,5 +1,13 @@
 version: 2.1
 
+parameters:
+  only_pacts:
+    type: boolean
+    default: false
+  pact_consumer_tags:
+    type: string
+    default: main
+
 orbs:
   hmpps: ministryofjustice/hmpps@2.2
   snyk: snyk/snyk@0.0.12
@@ -60,9 +68,42 @@ jobs:
           fail-on-issues: << parameters.snyk-fail-build >>
           additional-arguments: << parameters.snyk-args >>
 
+  pact_check_and_publish:
+    parameters:
+      consumer_tags:
+        type: string
+    environment:
+      PACTBROKER_HOST: "pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk"
+    executor: hmpps/java
+    docker:
+      - image: cimg/openjdk:11.0
+        environment:
+          POSTGRES_DB: circle_test
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "build.gradle.kts" }}
+            - gradle-
+      - run:
+          command: |
+            PACT_PROVIDER_VERSION="$CIRCLE_SHA1" \
+              PACT_PROVIDER_TAG="$CIRCLE_BRANCH" \
+              PACTBROKER_CONSUMERVERSIONSELECTORS_TAGS="<< parameters.consumer_tags >>" \
+              PACT_PUBLISH_RESULTS="true" \
+              ./gradlew pactTestPublish
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-{{ checksum "build.gradle.kts" }}
+      - store_test_results:
+          path: build/test-results
+      - store_artifacts:
+          path: build/reports/tests
 workflows:
   version: 2
   build-test-and-deploy:
+    unless: << pipeline.parameters.only_pacts >>
     jobs:
       - validate:
           filters:
@@ -117,6 +158,11 @@ workflows:
             - hmpps-user-preferences-prod
           requires:
             - request-prod-approval
+
+  pact:
+    jobs:
+      - pact_check_and_publish:
+          consumer_tags: << pipeline.parameters.pact_consumer_tags >>
 
   scheduled:
     triggers:
