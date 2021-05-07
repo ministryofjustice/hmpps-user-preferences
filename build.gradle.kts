@@ -4,6 +4,7 @@ plugins {
   id("org.jetbrains.kotlin.plugin.jpa") version "1.4.32"
   id("org.flywaydb.flyway") version "7.7.3"
 }
+val pactVersion = "4.2.2"
 
 tasks {
   test {
@@ -45,9 +46,7 @@ dependencies {
   runtimeOnly("com.h2database:h2:1.4.200")
 
   implementation("io.springfox:springfox-boot-starter:3.0.0")
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.2.2")
+  testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
 
-  testImplementation("au.com.dius:pact-jvm-provider-junit5:4.0.10") {
-    exclude("junit", "junit")
-  }
+  testImplementation("au.com.dius:pact-jvm-provider-junit5:4.0.10")
 }
