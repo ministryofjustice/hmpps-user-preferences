@@ -20,6 +20,8 @@ service, or more likely across services.
 - A configuration setting required by service specific business logic
 - Personally identifiable or sensitive data, e.g. offender identifiers
 
+For more informations, check our [Runbook](https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/2548662614/Prepare+a+Case+for+Sentence+RUNBOOK)
+
 ## Quickstart
 
 ### Requirements
