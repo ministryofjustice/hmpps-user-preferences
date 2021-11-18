@@ -43,10 +43,13 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-52:2.14.0")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
-  runtimeOnly("com.h2database:h2:1.4.200")
+  testRuntimeOnly("com.h2database:h2:1.4.200")
 
   implementation("io.springfox:springfox-boot-starter:3.0.0")
-  testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
 
-  testImplementation("au.com.dius:pact-jvm-provider-junit5:4.0.10")
+  // Test
+  testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
+  testImplementation("au.com.dius.pact.provider:junit5:$pactVersion")
+  testImplementation("au.com.dius.pact:consumer:$pactVersion")
+  testImplementation("au.com.dius.pact.consumer:junit5:$pactVersion")
 }
