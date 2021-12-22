@@ -117,10 +117,12 @@ workflows:
             branches:
               only:
                 - main
+      #     TODO: DELETE after live migration
       - hmpps/deploy_env:
           name: deploy_dev
           retrieve_secrets: none
           env: "dev"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live1.yaml
           context: hmpps-common-vars
           filters:
             branches:
@@ -138,6 +140,7 @@ workflows:
           name: deploy_preprod
           retrieve_secrets: none
           env: "preprod"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live1.yaml
           context:
             - hmpps-common-vars
             - hmpps-user-preferences-preprod
@@ -151,6 +154,7 @@ workflows:
           name: deploy_prod
           retrieve_secrets: none
           env: "prod"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live1.yaml
           slack_channel_name: probation_in_court_dev
           slack_notification: true
           context:
@@ -158,7 +162,46 @@ workflows:
             - hmpps-user-preferences-prod
           requires:
             - request-prod-approval
+      #         TODO: END
 
+      - hmpps/deploy_env:
+          name: deploy_live_dev
+          retrieve_secrets: none
+          env: "dev"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
+          context:
+            - hmpps-common-vars
+            - hmpps-user-preferences-live-dev
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - validate
+            - build_docker
+            - helm_lint
+      - hmpps/deploy_env:
+          name: deploy_live_preprod
+          retrieve_secrets: none
+          env: "preprod"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
+          context:
+            - hmpps-common-vars
+            - hmpps-user-preferences-live-preprod
+          requires:
+            - request-preprod-approval
+      - hmpps/deploy_env:
+          name: deploy_live_prod
+          retrieve_secrets: none
+          env: "prod"
+          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
+          slack_channel_name: probation_in_court_dev
+          slack_notification: true
+          context:
+            - hmpps-common-vars
+            - hmpps-user-preferences-live-prod
+          requires:
+            - request-prod-approval
   pact:
     jobs:
       - pact_check_and_publish:
