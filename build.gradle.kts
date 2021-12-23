@@ -43,7 +43,7 @@ dependencies {
   implementation("com.vladmihalcea:hibernate-types-52:2.14.0")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.postgresql:postgresql")
-  testRuntimeOnly("com.h2database:h2:1.4.200")
+  testRuntimeOnly("com.h2database:h2:2.0.204")
 
   implementation("io.springfox:springfox-boot-starter:3.0.0")
 
