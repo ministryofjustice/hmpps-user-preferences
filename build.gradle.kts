@@ -1,5 +1,5 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "3.3.15"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.0.0"
   kotlin("plugin.spring") version "1.6.10"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
   id("org.flywaydb.flyway") version "8.4.0"
@@ -45,7 +45,7 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
-  implementation("io.springfox:springfox-boot-starter:3.0.0")
+  implementation("org.springdoc:springdoc-openapi-ui:1.6.4")
 
   // Test
   testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
