@@ -1,14 +1,14 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.service
 
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoMoreInteractions
+import org.mockito.kotlin.whenever
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.controller.PreferencesDTO
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.repository.PreferenceRepository
@@ -45,7 +45,12 @@ class PreferencesServiceTest {
     val savedPreferences = preferenceService.putPreferences("user_id", "preference_name", preferencesDTO)
 
     verify(preferenceRepository).deleteAll(emptyList())
-    verify(telemetryService).trackEvent(TelemetryEventType.PREFERENCES_UPDATED, "user_id", "preference_name", preferencesDTO.items)
+    verify(telemetryService).trackEvent(
+      TelemetryEventType.PREFERENCES_UPDATED,
+      "user_id",
+      "preference_name",
+      preferencesDTO.items
+    )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
     assertThat(savedPreferences).isEqualTo(preferencesDTO)
@@ -65,7 +70,12 @@ class PreferencesServiceTest {
 
     verify(preferenceRepository).deleteAll(preferencesList)
     verify(preferenceRepository).saveAll(preferencesList)
-    verify(telemetryService).trackEvent(TelemetryEventType.PREFERENCES_UPDATED, "user_id", "preference_name", preferencesDTO.items)
+    verify(telemetryService).trackEvent(
+      TelemetryEventType.PREFERENCES_UPDATED,
+      "user_id",
+      "preference_name",
+      preferencesDTO.items
+    )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
     assertThat(savedPreferences).isEqualTo(preferencesDTO)
