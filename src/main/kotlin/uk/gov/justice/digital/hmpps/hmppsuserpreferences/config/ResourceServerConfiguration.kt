@@ -25,10 +25,9 @@ class ResourceServerConfiguration : WebSecurityConfigurerAdapter() {
           "/health",
           "/ping",
           "/swagger-resources/**",
-          "/v2/api-docs",
+          "/v3/api-docs/**",
           "/swagger-ui.html",
           "/swagger-ui/**",
-          "/webjars/springfox-swagger-ui/**"
         ).permitAll()
         it.anyRequest().authenticated()
       }
