@@ -113,10 +113,10 @@ workflows:
           name: helm_lint
       - hmpps/build_docker:
           name: build_docker
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
       - hmpps/deploy_env:
           name: deploy_dev
           env: "dev"
@@ -124,10 +124,10 @@ workflows:
           context:
             - hmpps-common-vars
             - hmpps-user-preferences-live-dev
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
           requires:
             - validate
             - build_docker
@@ -160,6 +160,13 @@ workflows:
             - hmpps-user-preferences-live-prod
           requires:
             - request-prod-approval
+      - vulnerability_scan:
+          name: vulnerability_scan_and_monitor
+          monitor: true
+          <<: *snyk_options
+      - hmpps/build_docker:
+          publish: false
+          <<: *snyk_options
   pact:
     jobs:
       - pact_check_and_publish:
