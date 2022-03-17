@@ -9,8 +9,8 @@ parameters:
     default: main
 
 orbs:
-  hmpps: ministryofjustice/hmpps@2.2
-  snyk: snyk/snyk@0.0.12
+  hmpps: ministryofjustice/hmpps@3.14.3
+  snyk: snyk/snyk@1.1.2
 
 _snyk_options: &snyk_options
   snyk-scan: true
@@ -119,7 +119,6 @@ workflows:
                 - main
       - hmpps/deploy_env:
           name: deploy_dev
-          retrieve_secrets: none
           env: "dev"
           helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
           context:
@@ -139,7 +138,6 @@ workflows:
             - deploy_dev
       - hmpps/deploy_env:
           name: deploy_preprod
-          retrieve_secrets: none
           env: "preprod"
           helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
           context:
@@ -153,7 +151,6 @@ workflows:
             - deploy_preprod
       - hmpps/deploy_env:
           name: deploy_prod
-          retrieve_secrets: none
           env: "prod"
           helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
           slack_channel_name: probation_in_court_dev
