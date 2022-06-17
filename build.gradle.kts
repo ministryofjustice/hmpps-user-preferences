@@ -2,7 +2,7 @@ plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.2.3"
   kotlin("plugin.spring") version "1.6.21"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.6.21"
-  id("org.flywaydb.flyway") version "8.5.12"
+  id("org.flywaydb.flyway") version "8.5.13"
 }
 val pactVersion = "4.3.9"
 
