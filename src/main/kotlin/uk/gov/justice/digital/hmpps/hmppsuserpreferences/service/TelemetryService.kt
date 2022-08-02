@@ -10,9 +10,15 @@ class TelemetryService {
   @Autowired
   lateinit var telemetryClient: TelemetryClient
 
-  fun trackEvent(eventType: TelemetryEventType, userId: String, preferenceName: String, preferenceValues: List<String>) {
+  fun trackEvent(
+    eventType: TelemetryEventType,
+    userId: String,
+    preferenceName: String,
+    preferenceValues: List<String>,
+    previousPreferenceValues: List<String>
+  ) {
 
-    var properties = mapOf("userId" to userId, "preferenceName" to preferenceName, "values" to preferenceValues.joinToString())
+    var properties = mapOf("userId" to userId, "preferenceName" to preferenceName, "values" to preferenceValues.joinToString(), "previousValues" to previousPreferenceValues.joinToString())
 
     telemetryClient.trackEvent(eventType.eventName, properties, emptyMap())
   }

@@ -26,9 +26,10 @@ class PreferencesService {
     val preferences = preferencesDto.items
       .map { item -> Preference(userId, preferenceName, item) }
 
-    preferenceRepository.deleteAll(preferenceRepository.findByHmppsUserIdAndName(userId, preferenceName))
+    val currentPreferences = preferenceRepository.findByHmppsUserIdAndName(userId, preferenceName)
+    preferenceRepository.deleteAll(currentPreferences)
     preferenceRepository.saveAll(preferences)
-    telemetryService.trackEvent(TelemetryEventType.PREFERENCES_UPDATED, userId, preferenceName, preferencesDto.items)
+    telemetryService.trackEvent(TelemetryEventType.PREFERENCES_UPDATED, userId, preferenceName, preferencesDto.items, currentPreferences.map { preference -> preference.value })
     return preferencesDto
   }
 }
