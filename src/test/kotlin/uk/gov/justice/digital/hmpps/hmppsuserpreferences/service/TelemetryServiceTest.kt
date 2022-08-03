@@ -23,10 +23,11 @@ internal class TelemetryServiceTest {
       TelemetryEventType.PREFERENCES_UPDATED,
       "user_id",
       "preferenceName",
-      listOf("B10JQ", "B14AV")
+      listOf("B10JQ", "B14AV"),
+      listOf("ABC", "DEF")
     )
 
-    var properties = mapOf("userId" to "user_id", "preferenceName" to "preferenceName", "values" to "B10JQ, B14AV")
+    var properties = mapOf("userId" to "user_id", "preferenceName" to "preferenceName", "values" to "B10JQ, B14AV", "previousValues" to "ABC, DEF")
 
     verify(telemetryClient).trackEvent("UserPreferencesUpdated", properties, emptyMap())
   }

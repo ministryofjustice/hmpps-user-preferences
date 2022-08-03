@@ -49,7 +49,8 @@ class PreferencesServiceTest {
       TelemetryEventType.PREFERENCES_UPDATED,
       "user_id",
       "preference_name",
-      preferencesDTO.items
+      preferencesDTO.items,
+      emptyList()
     )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
@@ -74,7 +75,8 @@ class PreferencesServiceTest {
       TelemetryEventType.PREFERENCES_UPDATED,
       "user_id",
       "preference_name",
-      preferencesDTO.items
+      preferencesDTO.items,
+      preferencesList.map { preference -> preference.value }
     )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
