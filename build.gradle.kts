@@ -40,7 +40,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   runtimeOnly("org.flywaydb:flyway-core")
-  runtimeOnly("org.postgresql:postgresql:42.4.1")
+  runtimeOnly("org.postgresql:postgresql:42.4.2")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
   implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
