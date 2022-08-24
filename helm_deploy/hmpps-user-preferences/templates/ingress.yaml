@@ -1,14 +1,14 @@
 {{- if .Values.ingress.enabled -}}
   {{- $fullName := include "app.fullname" . -}}
   {{- $ingressPath := .Values.ingress.path -}}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
   {{- include "app.labels" . | nindent 4 }}
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    ingressClassName: modsec
     {{ if .Values.ingress.enable_whitelist }}nginx.ingress.kubernetes.io/whitelist-source-range: {{ include "app.joinListWithComma" .Values.whitelist | quote }}{{ end }}
     nginx.ingress.kubernetes.io/custom-http-errors: "418"
     external-dns.alpha.kubernetes.io/set-identifier: {{ $fullName }}-{{ .Release.Namespace }}-{{ .Values.ingress.contextColour }}
@@ -28,8 +28,11 @@ spec:
       http:
         paths:
           - path: {{ $ingressPath }}
+            pathType: ImplementationSpecific
             backend:
-              serviceName: {{ $fullName }}
-              servicePort: http
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
   {{- end }}
   {{- end }}
