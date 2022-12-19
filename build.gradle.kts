@@ -1,6 +1,6 @@
 plugins {
   id("uk.gov.justice.hmpps.gradle-spring-boot") version "4.7.4"
-  kotlin("plugin.spring") version "1.7.21"
+  kotlin("plugin.spring") version "1.7.22"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.7.22"
   id("org.flywaydb.flyway") version "9.10.1"
 }
