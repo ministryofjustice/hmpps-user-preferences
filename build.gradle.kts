@@ -27,6 +27,17 @@ tasks {
   }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        apiVersion = '1.1'
+        languageVersion = '1.1'
+    }
+}
+
 configurations {
   testImplementation { exclude(group = "org.junit.vintage") }
 }
