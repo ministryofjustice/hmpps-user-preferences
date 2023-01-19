@@ -163,6 +163,8 @@ workflows:
   pact:
     jobs:
       - pact_check_and_publish:
+          context:
+            - hmpps-common-vars
           consumer_tags: << pipeline.parameters.pact_consumer_tags >>
 
   scheduled:
