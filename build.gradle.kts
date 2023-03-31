@@ -4,7 +4,7 @@ plugins {
   id("org.jetbrains.kotlin.plugin.jpa") version "1.8.0"
   id("org.flywaydb.flyway") version "9.14.0"
 }
-val pactVersion = "4.3.16"
+val pactVersion = "4.5.5"
 
 tasks {
   test {
