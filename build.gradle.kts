@@ -43,7 +43,7 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql:42.5.2")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
-  implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+  implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
 
   // Test
   testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
