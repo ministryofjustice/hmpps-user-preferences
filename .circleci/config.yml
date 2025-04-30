@@ -21,7 +21,7 @@ jobs:
   validate:
     executor: hmpps/java
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/openjdk:21.0.2-browsers
         environment:
           POSTGRES_DB: circle_test
       - image: circleci/postgres:10-alpine-ram
@@ -76,7 +76,7 @@ jobs:
       PACTBROKER_HOST: "pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk"
     executor: hmpps/java
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/openjdk:21.0.2-browsers
         environment:
           POSTGRES_DB: circle_test
     steps:
