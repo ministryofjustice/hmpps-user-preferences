@@ -5,5 +5,8 @@
   },
   "heartbeat": {
     "intervalSeconds": 15
+  },
+  "customDimensions": {
+    "service.version": "${BUILD_NUMBER}"
   }
 }
