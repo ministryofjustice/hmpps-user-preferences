@@ -24,7 +24,7 @@ jobs:
       - image: cimg/openjdk:21.0.2-browsers
         environment:
           POSTGRES_DB: circle_test
-      - image: circleci/postgres:10-alpine-ram
+      - image: cimg/postgres:14.9
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: preferences_test
