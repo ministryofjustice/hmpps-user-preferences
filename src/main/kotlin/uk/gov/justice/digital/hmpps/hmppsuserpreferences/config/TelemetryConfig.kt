@@ -21,26 +21,20 @@ class TelemetryConfig {
 
   @Bean
   @Conditional(AppInsightKeyAbsentCondition::class)
-  fun getTelemetryClient(): TelemetryClient {
-    return TelemetryClient()
-  }
+  fun getTelemetryClient(): TelemetryClient = TelemetryClient()
 
   private class AppInsightKeyAbsentCondition : Condition {
     override fun matches(
       @NonNull context: ConditionContext,
       @NonNull metadata: AnnotatedTypeMetadata,
-    ): Boolean {
-      return StringUtils.isEmpty(context.environment.getProperty("application.insights.ikey"))
-    }
+    ): Boolean = StringUtils.isEmpty(context.environment.getProperty("application.insights.ikey"))
   }
 
   @Bean
   @Profile("!test")
   @RequestScope
-  fun requestProperties(): Map<String, String> {
-    return Optional.ofNullable(ThreadContext.getRequestTelemetryContext())
-      .map { obj: RequestTelemetryContext -> obj.httpRequestTelemetry }
-      .map { obj: RequestTelemetry -> obj.properties }
-      .orElse(emptyMap())
-  }
+  fun requestProperties(): Map<String, String> = Optional.ofNullable(ThreadContext.getRequestTelemetryContext())
+    .map { obj: RequestTelemetryContext -> obj.httpRequestTelemetry }
+    .map { obj: RequestTelemetry -> obj.properties }
+    .orElse(emptyMap())
 }

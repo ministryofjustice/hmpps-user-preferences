@@ -28,9 +28,7 @@ class PreferencesController {
     value = ["/users/{userId}/preferences/{preferenceName}"],
     produces = [APPLICATION_JSON_VALUE],
   )
-  fun getPreferences(@PathVariable userId: String, @PathVariable preferenceName: String): PreferencesDTO {
-    return preferencesService.getPreferences(userId, preferenceName)
-  }
+  fun getPreferences(@PathVariable userId: String, @PathVariable preferenceName: String): PreferencesDTO = preferencesService.getPreferences(userId, preferenceName)
 
   @Operation(description = "Put a user's preferences by preference name")
   @ResponseStatus(value = HttpStatus.CREATED)
@@ -39,7 +37,5 @@ class PreferencesController {
     @PathVariable userId: String,
     @PathVariable preferenceName: String,
     @RequestBody preferences: PreferencesDTO,
-  ): PreferencesDTO {
-    return preferencesService.putPreferences(userId, preferenceName, preferences)
-  }
+  ): PreferencesDTO = preferencesService.putPreferences(userId, preferenceName, preferences)
 }
