@@ -1,25 +1,28 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.config
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter
+import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
 @Profile("!unsecured")
-class ResourceServerConfiguration : WebSecurityConfigurerAdapter() {
-  override fun configure(http: HttpSecurity) {
+class ResourceServerConfiguration {
+
+  @Bean
+  fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
     http
       .sessionManagement()
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and().csrf().disable()
-      .authorizeRequests {
-        it.antMatchers(
+      .authorizeHttpRequests {
+        it.requestMatchers(
           "/health/**",
           "/info",
           "/health",
@@ -32,6 +35,8 @@ class ResourceServerConfiguration : WebSecurityConfigurerAdapter() {
         it.anyRequest().authenticated()
       }
       .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter())
+
+    return http.build()
   }
 
   fun jwtAuthenticationConverter(): JwtAuthenticationConverter {

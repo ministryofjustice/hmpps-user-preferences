@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.service.PreferencesService
 
 data class PreferencesDTO(
-  val items: List<String>
+  val items: List<String>,
 )
 
 @Tag(name = "User preference resources")
@@ -26,11 +26,9 @@ class PreferencesController {
   @Operation(description = "Gets a user's preferences by preference name")
   @GetMapping(
     value = ["/users/{userId}/preferences/{preferenceName}"],
-    produces = [APPLICATION_JSON_VALUE]
+    produces = [APPLICATION_JSON_VALUE],
   )
-  fun getPreferences(@PathVariable userId: String, @PathVariable preferenceName: String): PreferencesDTO {
-    return preferencesService.getPreferences(userId, preferenceName)
-  }
+  fun getPreferences(@PathVariable userId: String, @PathVariable preferenceName: String): PreferencesDTO = preferencesService.getPreferences(userId, preferenceName)
 
   @Operation(description = "Put a user's preferences by preference name")
   @ResponseStatus(value = HttpStatus.CREATED)
@@ -38,8 +36,6 @@ class PreferencesController {
   fun putPreferences(
     @PathVariable userId: String,
     @PathVariable preferenceName: String,
-    @RequestBody preferences: PreferencesDTO
-  ): PreferencesDTO {
-    return preferencesService.putPreferences(userId, preferenceName, preferences)
-  }
+    @RequestBody preferences: PreferencesDTO,
+  ): PreferencesDTO = preferencesService.putPreferences(userId, preferenceName, preferences)
 }

@@ -6,6 +6,8 @@
 .idea/
 .gradle/
 build/
+bin/
+.DS_Store
 
 # CMake
 cmake-build-debug/

@@ -27,7 +27,7 @@ class PreferencesServiceTest {
   private val preferencesList = listOf(
     Preference("user_id", "preference_name", "value_1"),
     Preference("user_id", "preference_name", "value_2"),
-    Preference("user_id", "preference_name", "value_3")
+    Preference("user_id", "preference_name", "value_3"),
   )
 
   private val preferencesDTO = PreferencesDTO(listOf("value_1", "value_2", "value_3"))
@@ -36,8 +36,8 @@ class PreferencesServiceTest {
   fun `Put preferences should store preferences and return DTO`() {
     whenever(
       preferenceRepository.saveAll(
-        preferencesList
-      )
+        preferencesList,
+      ),
     ).thenReturn(preferencesList)
     whenever(preferenceRepository.findByHmppsUserIdAndName("user_id", "preference_name"))
       .thenReturn(emptyList())
@@ -50,7 +50,7 @@ class PreferencesServiceTest {
       "user_id",
       "preference_name",
       preferencesDTO.items,
-      emptyList()
+      emptyList(),
     )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 
@@ -61,8 +61,8 @@ class PreferencesServiceTest {
   fun `Put preferences should overwrite existing preferences and return DTO`() {
     whenever(
       preferenceRepository.saveAll(
-        preferencesList
-      )
+        preferencesList,
+      ),
     ).thenReturn(preferencesList)
     whenever(preferenceRepository.findByHmppsUserIdAndName("user_id", "preference_name"))
       .thenReturn(preferencesList)
@@ -76,7 +76,7 @@ class PreferencesServiceTest {
       "user_id",
       "preference_name",
       preferencesDTO.items,
-      preferencesList.map { preference -> preference.value }
+      preferencesList.map { preference -> preference.value },
     )
     verifyNoMoreInteractions(preferenceRepository, telemetryService)
 

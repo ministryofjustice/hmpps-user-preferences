@@ -11,10 +11,11 @@ private const val USER_ID = "user_id"
 private const val PREFERENCE_NAME = "court"
 
 @DataJpaTest
-class PreferenceTest(
+class PreferenceTest {
+
   @Autowired
-  val preferenceRepository: PreferenceRepository,
-) {
+  lateinit var preferenceRepository: PreferenceRepository
+
   @Test
   fun `Test save preference`() {
     val preference = savePreference(USER_ID, PREFERENCE_NAME, "SHF")
@@ -42,7 +43,7 @@ class PreferenceTest(
   private fun savePreference(
     hmppsUserId: String,
     name: String,
-    value: String
+    value: String,
   ): Preference {
     val preference = Preference(hmppsUserId, name, value)
     preferenceRepository.save(preference)

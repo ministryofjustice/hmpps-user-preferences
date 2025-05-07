@@ -1,9 +1,9 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.controller
 
-import com.google.common.net.HttpHeaders
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.TEST_TOKEN
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
@@ -23,7 +23,6 @@ class GetPreferencesControllerIntTest : IntegrationTestBase() {
 
   @Test
   fun `GET preferences endpoint returns existing preferences`() {
-
     preferenceRepository.save(Preference(userId, courtKey, "Sheffield"))
     preferenceRepository.save(Preference(userId, courtKey, "North Tyneside"))
 
@@ -39,7 +38,6 @@ class GetPreferencesControllerIntTest : IntegrationTestBase() {
 
   @Test
   fun `PUT preferences endpoint creates preferences`() {
-
     webTestClient.put().uri(String.format(prefsPath, userId, courtKey))
       .bodyValue(inputPreferences)
       .header(HttpHeaders.AUTHORIZATION, TEST_TOKEN)
@@ -53,7 +51,7 @@ class GetPreferencesControllerIntTest : IntegrationTestBase() {
     assertThat(preferenceRepository.findByHmppsUserIdAndName(userId, courtKey))
       .contains(
         Preference(userId, courtKey, "Sheffield"),
-        Preference(userId, courtKey, "North Tyneside")
+        Preference(userId, courtKey, "North Tyneside"),
       )
   }
 }

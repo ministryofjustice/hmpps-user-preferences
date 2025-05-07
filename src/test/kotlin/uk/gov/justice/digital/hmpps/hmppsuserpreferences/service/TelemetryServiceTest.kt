@@ -18,13 +18,12 @@ internal class TelemetryServiceTest {
 
   @Test
   fun `Put preferences should store preferences and return DTO`() {
-
     telemetryService.trackEvent(
       TelemetryEventType.PREFERENCES_UPDATED,
       "user_id",
       "preferenceName",
       listOf("B10JQ", "B14AV"),
-      listOf("ABC", "DEF")
+      listOf("ABC", "DEF"),
     )
 
     var properties = mapOf("userId" to "user_id", "preferenceName" to "preferenceName", "values" to "B10JQ, B14AV", "previousValues" to "ABC, DEF")
