@@ -9,7 +9,7 @@ parameters:
     default: main
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.14.3
+  hmpps: ministryofjustice/hmpps@11
   snyk: snyk/snyk@1.1.2
 
 _snyk_options: &snyk_options
