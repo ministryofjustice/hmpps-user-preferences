@@ -9,7 +9,7 @@ parameters:
     default: main
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.14.3
+  hmpps: ministryofjustice/hmpps@11
   snyk: snyk/snyk@1.1.2
 
 _snyk_options: &snyk_options
@@ -19,7 +19,9 @@ _snyk_options: &snyk_options
 
 jobs:
   validate:
-    executor: hmpps/java
+    executor: 
+      name: hmpps/java
+      tag: 21.0.2-browsers
     docker:
       - image: cimg/openjdk:21.0.2-browsers
         environment:
@@ -47,7 +49,9 @@ jobs:
           path: build/reports/tests
 
   vulnerability_scan:
-    executor: hmpps/java
+    executor: 
+      name: hmpps/java
+      tag: 21.0.2-browsers
     parameters:
       monitor:
         type: boolean
@@ -74,7 +78,9 @@ jobs:
         type: string
     environment:
       PACTBROKER_HOST: "pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk"
-    executor: hmpps/java
+    executor: 
+      name: hmpps/java
+      tag: 21.0.2-browsers
     docker:
       - image: cimg/openjdk:21.0.2-browsers
         environment:
