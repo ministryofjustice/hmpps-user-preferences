@@ -6,7 +6,7 @@ plugins {
   kotlin("plugin.spring") version "2.0.20"
   kotlin("jvm") version "2.0.20"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.8.0"
-  id("org.flywaydb.flyway") version "9.14.0"
+  id("org.flywaydb.flyway") version "11.8.2"
 }
 val pactVersion = "4.3.16"
 
