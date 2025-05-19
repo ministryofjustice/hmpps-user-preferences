@@ -57,4 +57,8 @@
         <appender-ref ref="logAppender"/>
     </root>
 
+    <logger name="org.flywaydb.core.FlywayExecutor" additivity="false" level="WARN">
+        <appender-ref ref="consoleAppender"/>
+    </logger>
+
 </configuration>
