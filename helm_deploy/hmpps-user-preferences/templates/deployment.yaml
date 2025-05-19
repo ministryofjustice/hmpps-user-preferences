@@ -41,9 +41,13 @@ spec:
               protocol: TCP
 
           securityContext:
+           allowPrivilegeEscalation: false
            runAsNonRoot: true
            runAsUser: 1000
            runAsGroup: 1000
+           capabilities:
+            drop:
+              - ALL
 
           livenessProbe:
             httpGet:
