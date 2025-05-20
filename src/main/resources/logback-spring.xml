@@ -39,10 +39,6 @@
         <appender-ref ref="logAppender"/>
     </logger>
 
-    <logger name="com.microsoft.applicationinsights" additivity="false" level="INFO">
-        <appender-ref ref="logAppender"/>
-    </logger>
-
     <logger name="org.apache.catalina" additivity="false" level="INFO">
         <appender-ref ref="logAppender"/>
         <appender-ref ref="consoleAppender"/>
