@@ -6,7 +6,7 @@ plugins {
   kotlin("plugin.spring") version "2.0.20"
   kotlin("jvm") version "2.0.20"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.8.0"
-  id("org.flywaydb.flyway") version "9.14.0"
+  id("org.flywaydb.flyway") version "11.3.4"
 }
 val pactVersion = "4.3.16"
 
@@ -48,6 +48,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   runtimeOnly("org.flywaydb:flyway-core")
+  runtimeOnly("org.flywaydb:flyway-database-postgresql:11.3.4")
   runtimeOnly("org.postgresql:postgresql:42.5.5")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
