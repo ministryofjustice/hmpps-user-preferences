@@ -115,6 +115,10 @@ workflows:
           filters:
             tags:
               ignore: /.*/
+      - vulnerability_scan:
+          name: vulnerability_scan_and_monitor
+          monitor: true
+          <<: *snyk_options
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
