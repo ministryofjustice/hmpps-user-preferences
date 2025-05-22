@@ -117,7 +117,7 @@ workflows:
               ignore: /.*/
       - snyk/scan:
           project: '${CIRCLE_PROJECT_REPONAME}'
-          monitor-on-build: << parameters.monitor >>
+          monitor-on-build: false
           organization: "digital-probation-services"
           severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
           fail-on-issues: true
