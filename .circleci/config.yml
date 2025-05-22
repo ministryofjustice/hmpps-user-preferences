@@ -115,14 +115,10 @@ workflows:
           filters:
             tags:
               ignore: /.*/
-      - snyk/scan:
-          project: '${CIRCLE_PROJECT_REPONAME}'
-          monitor-on-build: false
-          organization: "digital-probation-services"
-          severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
-          fail-on-issues: true
-          snyk-scan: true
-          snyk-args: --policy-path=.snyk --configuration-matching='^((?!test).)*$'
+      - vulnerability_scan:
+          name: vulnerability_scan_and_monitor
+          monitor: true
+          <<: *snyk_options
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
