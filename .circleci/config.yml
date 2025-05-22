@@ -120,8 +120,9 @@ workflows:
           monitor-on-build: << parameters.monitor >>
           organization: "digital-probation-services"
           severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
-          fail-on-issues: << parameters.snyk-fail-build >>
-          additional-arguments: << parameters.snyk-args >>
+          fail-on-issues: true
+          snyk-scan: true
+          snyk-args: --policy-path=.snyk --configuration-matching='^((?!test).)*$'
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
