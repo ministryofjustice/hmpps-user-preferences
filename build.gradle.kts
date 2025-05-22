@@ -43,6 +43,7 @@ dependencies {
   // security
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+  implementation("org.springframework.security:spring-security-core:6.4.6")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
