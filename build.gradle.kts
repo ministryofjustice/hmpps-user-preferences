@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.1.0"
-  kotlin("plugin.spring") version "2.0.20"
-  kotlin("jvm") version "2.0.20"
-  id("org.jetbrains.kotlin.plugin.jpa") version "1.8.0"
-  id("org.flywaydb.flyway") version "11.3.4"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.2.0"
+  kotlin("plugin.spring") version "2.1.21"
+  kotlin("jvm") version "2.1.21"
+  id("org.jetbrains.kotlin.plugin.jpa") version "1.9.25"
+  id("org.flywaydb.flyway") version "11.8.2"
 }
-val pactVersion = "4.3.16"
+val pactVersion = "4.6.17"
 
 tasks {
   test {
@@ -43,21 +43,21 @@ dependencies {
   // security
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-  implementation("org.springframework.security:spring-security-core:6.4.6")
+  implementation("org.springframework.security:spring-security-core:6.5.0")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   runtimeOnly("org.flywaydb:flyway-core")
-  runtimeOnly("org.flywaydb:flyway-database-postgresql:11.3.4")
-  runtimeOnly("org.postgresql:postgresql:42.5.5")
+  runtimeOnly("org.flywaydb:flyway-database-postgresql:11.8.2")
+  runtimeOnly("org.postgresql:postgresql:42.7.5")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
-  implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+  implementation("org.springdoc:springdoc-openapi-ui:1.8.0")
   implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
-  implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
+  implementation("com.microsoft.azure:applicationinsights-web:3.7.2")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
-  implementation("org.apache.commons:commons-lang3:3.14.0")
+  implementation("org.apache.commons:commons-lang3:3.17.0")
 
   // Test
   testImplementation("au.com.dius.pact.provider:junit5spring:$pactVersion")
