@@ -7,15 +7,12 @@ parameters:
   pact_consumer_tags:
     type: string
     default: main
+  alerts-slack-channel:
+    type: string
+    default: probation_in_court_alerts_dev
 
 orbs:
   hmpps: ministryofjustice/hmpps@11
-  snyk: snyk/snyk@1.1.2
-
-_snyk_options: &snyk_options
-  snyk-scan: true
-  snyk-fail-build: true
-  snyk-args: --policy-path=.snyk --configuration-matching='^((?!test).)*$'
 
 jobs:
   validate:
@@ -47,30 +44,6 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
-
-  vulnerability_scan:
-    executor: 
-      name: hmpps/java
-      tag: 21.0.2-browsers
-    parameters:
-      monitor:
-        type: boolean
-        default: false
-      snyk-scan:
-        type: boolean
-      snyk-fail-build:
-        type: boolean
-      snyk-args:
-        type: string
-    steps:
-      - checkout
-      - snyk/scan:
-          project: '${CIRCLE_PROJECT_REPONAME}'
-          monitor-on-build: << parameters.monitor >>
-          organization: "digital-probation-services"
-          severity-threshold: "high" # note: this does not affect snyk 'monitor' commands
-          fail-on-issues: << parameters.snyk-fail-build >>
-          additional-arguments: << parameters.snyk-args >>
 
   pact_check_and_publish:
     parameters:
@@ -106,8 +79,47 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
+          
 workflows:
   version: 2
+  security:
+    triggers:
+      - schedule:
+          cron: "52 6 * * 1-5"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - hmpps/gradle_owasp_dependency_check:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          jdk_tag: "21.0"
+          context:
+            - hmpps-common-vars
+      - hmpps/trivy_latest_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - hmpps-common-vars
+      - hmpps/veracode_pipeline_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - hmpps-common-vars
+            - veracode-credentials
+  security-weekly:
+    triggers:
+      - schedule:
+          cron: "23 4 * * 1"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - hmpps/veracode_policy_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - veracode-credentials
+            - hmpps-common-vars  
+  
   build-test-and-deploy:
     unless: << pipeline.parameters.only_pacts >>
     jobs:
@@ -115,10 +127,6 @@ workflows:
           filters:
             tags:
               ignore: /.*/
-      - vulnerability_scan:
-          name: vulnerability_scan_and_monitor
-          monitor: true
-          <<: *snyk_options
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
@@ -176,20 +184,3 @@ workflows:
           context:
             - hmpps-common-vars
           consumer_tags: << pipeline.parameters.pact_consumer_tags >>
-
-  scheduled:
-    triggers:
-      - schedule:
-          cron: "0 7 * * 1-5"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - vulnerability_scan:
-          name: vulnerability_scan_and_monitor
-          monitor: true
-          <<: *snyk_options
-      - hmpps/build_docker:
-          publish: false
-          <<: *snyk_options
