@@ -52,7 +52,7 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql:42.5.5")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
-  implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
   implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
   implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
