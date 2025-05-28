@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.1.0"
-  kotlin("plugin.spring") version "2.0.20"
-  kotlin("jvm") version "2.0.20"
-  id("org.jetbrains.kotlin.plugin.jpa") version "1.8.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "8.2.0"
+  kotlin("plugin.spring") version "2.1.21"
+  kotlin("jvm") version "2.1.21"
+  kotlin("plugin.jpa") version "2.1.21"
   id("org.flywaydb.flyway") version "11.3.4"
 }
 val pactVersion = "4.3.16"
@@ -43,7 +43,6 @@ dependencies {
   // security
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-  implementation("org.springframework.security:spring-security-core:6.4.6")
 
   // database
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -53,7 +52,7 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql:42.5.5")
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
-  implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
   implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
   implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
