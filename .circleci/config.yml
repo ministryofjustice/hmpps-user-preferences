@@ -127,6 +127,17 @@ workflows:
           filters:
             tags:
               ignore: /.*/
+      - hmpps/gradle_owasp_dependency_check:
+          jdk_tag: "21.0"
+          context:
+            - hmpps-common-vars
+      - hmpps/trivy_latest_scan:
+          context:
+            - hmpps-common-vars
+      - hmpps/veracode_pipeline_scan:
+          context:
+            - hmpps-common-vars
+            - veracode-credentials
       - hmpps/helm_lint:
           name: helm_lint
       - hmpps/build_docker:
