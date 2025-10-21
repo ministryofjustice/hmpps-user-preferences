@@ -32,4 +32,21 @@ class PreferencesService {
     telemetryService.trackEvent(TelemetryEventType.PREFERENCES_UPDATED, userId, preferenceName, preferencesDto.items, previousPreferenceValues.map { preference -> preference.value })
     return preferencesDto
   }
+
+  @Transactional
+  fun deleteCourts(userId: String) {
+    val currentEnvironment = System.getProperty("spring.profiles.active")
+    if (currentEnvironment == "dev") {
+      val currentCourts = preferenceRepository.findByHmppsUserIdAndName(userId, "courts")
+      preferenceRepository.deleteAll(currentCourts)
+      telemetryService.trackEvent(
+        TelemetryEventType.PREFERENCES_UPDATED,
+        userId,
+        "courts",
+        listOf<String>(),
+        currentCourts.map { court -> court.value })
+    } else {
+      throw error("This endpoint is only for testing purposes")
+    }
+  }
 }
