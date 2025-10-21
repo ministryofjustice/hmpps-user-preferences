@@ -44,6 +44,6 @@ class PreferencesController {
   @ResponseStatus(value = HttpStatus.OK)
   @DeleteMapping("/users/{userId}/preferences/courts")
   fun deleteCourts(
-    @PathVariable userId: String
+    @PathVariable userId: String,
   ): Unit = preferencesService.deleteCourts(userId)
 }

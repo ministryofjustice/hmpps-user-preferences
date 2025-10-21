@@ -44,7 +44,8 @@ class PreferencesService {
         userId,
         "courts",
         listOf<String>(),
-        currentCourts.map { court -> court.value })
+        currentCourts.map { court -> court.value },
+      )
     } else {
       throw error("This endpoint is only for testing purposes")
     }
