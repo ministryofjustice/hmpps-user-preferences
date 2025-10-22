@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
@@ -38,4 +39,11 @@ class PreferencesController {
     @PathVariable preferenceName: String,
     @RequestBody preferences: PreferencesDTO,
   ): PreferencesDTO = preferencesService.putPreferences(userId, preferenceName, preferences)
+
+  @Operation(description = "Delete all courts for a user (for test usage only)")
+  @ResponseStatus(value = HttpStatus.OK)
+  @DeleteMapping("/users/{userId}/preferences/courts")
+  fun deleteCourts(
+    @PathVariable userId: String,
+  ): Unit = preferencesService.deleteCourts(userId)
 }
