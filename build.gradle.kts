@@ -53,7 +53,7 @@ dependencies {
   testRuntimeOnly("com.h2database:h2:1.4.200")
 
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
-  implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+  implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.4")
   implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
   implementation("org.apache.commons:commons-lang3:3.14.0")
