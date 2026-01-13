@@ -8,7 +8,7 @@ plugins {
   kotlin("plugin.jpa") version "2.2.0"
   id("org.flywaydb.flyway") version "11.3.4"
 }
-val pactVersion = "4.3.16"
+val pactVersion = "4.6.15"
 
 tasks {
   test {
