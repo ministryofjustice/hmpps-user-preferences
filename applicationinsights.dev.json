@@ -1,10 +1,6 @@
 {
   "role": {
-    "name": "hmpps-user-preferences",
-    "instance": "hmpps-user-preferences"
-  },
-  "heartbeat": {
-    "intervalSeconds": 15
+    "name": "hmpps-template-kotlin"
   },
   "customDimensions": {
     "service.version": "${BUILD_NUMBER}"
@@ -29,7 +25,7 @@
             "matchType": "regexp"
           }
         ],
-        "percentage": 10
+        "percentage": 100
       }
     ]
   }
