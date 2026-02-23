@@ -5,7 +5,7 @@ minReplicaCount: 2
 maxReplicaCount: 4
 
 image:
-  repository: quay.io/hmpps/hmpps-user-preferences
+  repository: ghcr.io/ministryofjustice/hmpps-user-preferences
   tag: latest
   port: 8080
 

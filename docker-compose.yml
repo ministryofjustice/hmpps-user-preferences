@@ -1,17 +1,17 @@
-version: "3"
 services:
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth:latest
+    image: ghcr.io/ministryofjustice/hmpps-auth:latest
     networks:
       - hmpps
     container_name: hmpps-auth
     ports:
-      - "8090:8090"
+      - "8090:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8090/auth/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/auth/health" ]
     environment:
       - SERVER_PORT=8090
       - SPRING_PROFILES_ACTIVE=dev
+      - APPLICATION_AUTHENTICATION_UI_ALLOWLIST=0.0.0.0/0
       - SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=false
 
   postgres:
