@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Conditional
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.core.type.AnnotatedTypeMetadata
-import org.springframework.lang.NonNull
 import org.springframework.web.context.annotation.RequestScope
 import java.util.Optional
 
@@ -25,8 +24,8 @@ class TelemetryConfig {
 
   private class AppInsightKeyAbsentCondition : Condition {
     override fun matches(
-      @NonNull context: ConditionContext,
-      @NonNull metadata: AnnotatedTypeMetadata,
+      context: ConditionContext,
+      metadata: AnnotatedTypeMetadata,
     ): Boolean = StringUtils.isEmpty(context.environment.getProperty("application.insights.ikey"))
   }
 

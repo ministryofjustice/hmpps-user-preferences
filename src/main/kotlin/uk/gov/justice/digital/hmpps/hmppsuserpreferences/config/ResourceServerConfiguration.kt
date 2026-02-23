@@ -18,9 +18,10 @@ class ResourceServerConfiguration {
   @Bean
   fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
     http
-      .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-      .and().csrf().disable()
+      .sessionManagement { session ->
+        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      }
+      .csrf { it.disable() }
       .authorizeHttpRequests {
         it.requestMatchers(
           "/health/**",
@@ -34,7 +35,9 @@ class ResourceServerConfiguration {
         ).permitAll()
         it.anyRequest().authenticated()
       }
-      .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter())
+      .oauth2ResourceServer { config ->
+        config.jwt { it.jwtAuthenticationConverter(jwtAuthenticationConverter()) }
+      }
 
     return http.build()
   }

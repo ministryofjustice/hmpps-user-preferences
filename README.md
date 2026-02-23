@@ -49,6 +49,14 @@ docker-compose up postgres
 SPRING_PROFILES_ACTIVE=postgres,dev ./gradlew bootRun
 ```
 
+### Initialise the database
+
+The database is automatically initialised on application startup with Flyway. 
+If you want to run the application locally with an empty database, run: 
+```bash
+./scripts/db-init.sh
+```
+
 ## Code Style
 
 [ktlint](https://github.com/pinterest/ktlint) is the authority on style and is enforced on build.

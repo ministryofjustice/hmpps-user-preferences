@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.templatepackagename.config
+package uk.gov.justice.digital.hmpps.hmppsuserpreferences.config
 
 import jakarta.validation.ValidationException
 import org.slf4j.LoggerFactory

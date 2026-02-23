@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.templatepackagename.config
+package uk.gov.justice.digital.hmpps.hmppsuserpreferences.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -9,7 +9,7 @@ import java.time.Duration
 
 @Configuration
 class WebClientConfiguration(
-  @param:Value("\${hmpps-auth.url}") val hmppsAuthBaseUri: String,
+  @param:Value("\${hmpps-auth.baseurl}") val hmppsAuthBaseUri: String,
   @param:Value("\${api.health-timeout:2s}") val healthTimeout: Duration,
   @param:Value("\${api.timeout:20s}") val timeout: Duration,
 ) {
