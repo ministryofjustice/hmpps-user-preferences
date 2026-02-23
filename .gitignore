@@ -5,6 +5,7 @@
 
 .idea/
 .gradle/
+.kotlin/
 build/
 bin/
 .DS_Store
@@ -66,6 +67,14 @@ dist
 
 # AWS DOcker build
 ecr.repo
+dps-gradle-spring-boot-suppressions.xml
 /dps-gradle-spring-boot-suppressions.xml
 .editorconfig
 /.trivyignore
+sonar-project.properties
+
+#Helm
+**/Chart.lock
+
+#Everything else:
+.DS_Store
