@@ -1,5 +1,4 @@
 version: 2.1
-
 parameters:
   only_pacts:
     type: boolean
@@ -7,16 +6,11 @@ parameters:
   pact_consumer_tags:
     type: string
     default: main
-  alerts-slack-channel:
-    type: string
-    default: probation_in_court_alerts_dev
-
 orbs:
   hmpps: ministryofjustice/hmpps@11
-
 jobs:
   validate:
-    executor: 
+    executor:
       name: hmpps/java
       tag: 21.0.2-browsers
     docker:
@@ -44,14 +38,13 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
-
   pact_check_and_publish:
     parameters:
       consumer_tags:
         type: string
     environment:
       PACTBROKER_HOST: "pact-broker-prod.apps.live-1.cloud-platform.service.justice.gov.uk"
-    executor: 
+    executor:
       name: hmpps/java
       tag: 21.0.2-browsers
     docker:
@@ -79,105 +72,8 @@ jobs:
           path: build/test-results
       - store_artifacts:
           path: build/reports/tests
-
 workflows:
   version: 2
-  security:
-    triggers:
-      - schedule:
-          cron: "52 6 * * 1-5"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - hmpps/gradle_owasp_dependency_check:
-          slack_channel: << pipeline.parameters.alerts-slack-channel >>
-          jdk_tag: "21.0"
-          context:
-            - hmpps-common-vars
-      - hmpps/trivy_latest_scan:
-          slack_channel: << pipeline.parameters.alerts-slack-channel >>
-          context:
-            - hmpps-common-vars
-      - hmpps/veracode_pipeline_scan:
-          slack_channel: << pipeline.parameters.alerts-slack-channel >>
-          context:
-            - hmpps-common-vars
-            - veracode-credentials
-  security-weekly:
-    triggers:
-      - schedule:
-          cron: "23 4 * * 1"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - hmpps/veracode_policy_scan:
-          slack_channel: << pipeline.parameters.alerts-slack-channel >>
-          context:
-            - veracode-credentials
-            - hmpps-common-vars  
-  
-  build-test-and-deploy:
-    unless: << pipeline.parameters.only_pacts >>
-    jobs:
-      - validate:
-          filters:
-            tags:
-              ignore: /.*/
-      - hmpps/helm_lint:
-          name: helm_lint
-      - hmpps/build_docker:
-          name: build_docker
-          filters:
-            branches:
-              only:
-                - main
-      - hmpps/deploy_env:
-          name: deploy_dev
-          env: "dev"
-          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
-          context:
-            - hmpps-common-vars
-            - hmpps-user-preferences-live-dev
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - validate
-            - build_docker
-            - helm_lint
-      - request-preprod-approval:
-          type: approval
-          requires:
-            - deploy_dev
-      - hmpps/deploy_env:
-          name: deploy_preprod
-          env: "preprod"
-          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
-          context:
-            - hmpps-common-vars
-            - hmpps-user-preferences-live-preprod
-          requires:
-            - request-preprod-approval
-      - request-prod-approval:
-          type: approval
-          requires:
-            - deploy_preprod
-      - hmpps/deploy_env:
-          name: deploy_prod
-          env: "prod"
-          helm_additional_args: --values ./hmpps-user-preferences/values-live.yaml
-          slack_channel_name: probation_in_court_dev
-          slack_notification: true
-          context:
-            - hmpps-common-vars
-            - hmpps-user-preferences-live-prod
-          requires:
-            - request-prod-approval
   pact:
     jobs:
       - pact_check_and_publish:

@@ -2,8 +2,7 @@ name: Security veracode policy scan
 on:
   workflow_dispatch:
   schedule:
-    - cron: "34 6 * * 1" # Every Monday
-
+    - cron: "9 4 * * 1" # Every Monday at 04:09 UTC
 jobs:
   create-artifact:
     name: Build the artifact for veracode to scan
