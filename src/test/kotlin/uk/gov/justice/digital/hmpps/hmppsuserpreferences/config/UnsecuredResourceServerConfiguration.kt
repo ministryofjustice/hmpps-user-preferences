@@ -17,9 +17,10 @@ class UnsecuredResourceServerConfiguration {
   fun configure(http: HttpSecurity): SecurityFilterChain {
     http
       // Can't have CSRF protection as requires session
-      .csrf().disable()
-      .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      .csrf { it.disable() }
+      .sessionManagement {
+        it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      }
 
     return http.build()
   }
