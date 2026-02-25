@@ -1,10 +1,12 @@
 package uk.gov.justice.digital.hmpps.hmppsuserpreferences.pact
 
+import au.com.dius.pact.provider.junit5.HttpTestTarget
 import au.com.dius.pact.provider.junit5.PactVerificationContext
 import au.com.dius.pact.provider.junitsupport.Provider
 import au.com.dius.pact.provider.junitsupport.State
 import au.com.dius.pact.provider.junitsupport.loader.PactBroker
 import au.com.dius.pact.provider.spring.junit5.PactVerificationSpringProvider
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.test.context.ActiveProfiles
@@ -14,6 +16,11 @@ import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.Integration
 @PactBroker
 @ActiveProfiles("test", "unsecured")
 class PrepareACaseConsumerVerificationPactTest : IntegrationTestBase() {
+
+  @BeforeEach
+  fun setupTestTarget(context: PactVerificationContext) {
+    context.target = HttpTestTarget(host = "localhost", path = "/")
+  }
 
   @TestTemplate
   @ExtendWith(PactVerificationSpringProvider::class)
