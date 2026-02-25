@@ -4,12 +4,14 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest
+import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
 
 private const val USER_ID = "user_id"
 
 private const val PREFERENCE_NAME = "court"
 
+@ActiveProfiles("test")
 @DataJpaTest
 class PreferenceTest {
 

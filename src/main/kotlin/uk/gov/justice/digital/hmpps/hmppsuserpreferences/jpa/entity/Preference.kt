@@ -16,7 +16,7 @@ data class Preference(
   @Column(nullable = false)
   val name: String,
 
-  @Column(nullable = false)
+  @Column(name = "\"value\"", nullable = false)
   val value: String,
 ) {
   @Id

@@ -6,7 +6,12 @@ management.endpoint:
   info.cache.time-to-live: 0
 spring:
   datasource:
-    url: 'jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE'
+    url: 'jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=VALUE'
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 
 hmpps-auth:
   url: "http://localhost:8090/auth"

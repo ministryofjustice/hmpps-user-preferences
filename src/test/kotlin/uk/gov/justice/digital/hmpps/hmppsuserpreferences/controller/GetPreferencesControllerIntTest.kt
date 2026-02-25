@@ -4,11 +4,13 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
+import org.springframework.test.context.ActiveProfiles
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.TEST_TOKEN
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.integration.IntegrationTestBase
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.entity.Preference
 import uk.gov.justice.digital.hmpps.hmppsuserpreferences.jpa.repository.PreferenceRepository
 
+@ActiveProfiles("test", "unsecured")
 class GetPreferencesControllerIntTest : IntegrationTestBase() {
   private val courtKey: String = "courts"
   private val userId: String = "userid"
