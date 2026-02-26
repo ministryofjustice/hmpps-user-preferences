@@ -39,7 +39,7 @@ dependencies {
   }
 }
 
-//TODO: review these each time we update a dependency, remove once parent dependencies are patched
+// TODO: review these each time we update a dependency, remove once parent dependencies are patched
 configurations.all {
   resolutionStrategy {
     // Force patched version of rhino to fix CVE-2025-66453
