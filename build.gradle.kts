@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.1")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.2")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-webclient")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
@@ -30,7 +30,7 @@ dependencies {
   // Test
   testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
   testImplementation("org.springframework.boot:spring-boot-data-jpa-test")
-  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:2.0.0")
+  testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:2.0.2")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
   testImplementation("au.com.dius.pact.provider:junit5spring:4.6.20")
@@ -46,8 +46,9 @@ configurations.all {
     force("org.mozilla:rhino:1.7.14.1")
 
     // These patches are due to vulnerable deps used
-    // by uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.1
-    // TODO: remove when we update to hmpps-kotlin-spring-boot-starter:2.0.2
+    // TODO: remove when we next update
+    // I patched assertj in hmpps-kotlin-spring-boot-starter:2.0.2, but the static analysis is still
+    // picking up the vulnerable version, so I am forcing the patched version here as well
     // Force patched version of assertj to fix CVE-2026-24400 (score 7.3)
     force("org.assertj:assertj-core:3.27.7")
     // Force patched version of tomcat embed to fix CVE-2026-24734 (score 7.5)
