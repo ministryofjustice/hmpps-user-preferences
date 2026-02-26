@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.0")
+  implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.1")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-webclient")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
@@ -33,9 +33,25 @@ dependencies {
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:2.0.0")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.17")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.37") {
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.20")
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.38") {
     exclude(group = "io.swagger.core.v3")
+  }
+}
+
+//TODO: review these each time we update a dependency, remove once parent dependencies are patched
+configurations.all {
+  resolutionStrategy {
+    // Force patched version of rhino to fix CVE-2025-66453
+    force("org.mozilla:rhino:1.7.14.1")
+
+    // These patches are due to vulnerable deps used
+    // by uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:2.0.1
+    // TODO: remove when we update to hmpps-kotlin-spring-boot-starter:2.0.2
+    // Force patched version of assertj to fix CVE-2026-24400 (score 7.3)
+    force("org.assertj:assertj-core:3.27.7")
+    // Force patched version of tomcat embed to fix CVE-2026-24734 (score 7.5)
+    force("org.apache.tomcat.embed:tomcat-embed-core:11.0.18")
   }
 }
 
