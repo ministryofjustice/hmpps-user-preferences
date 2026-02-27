@@ -22,7 +22,7 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql:42.5.5")
   testRuntimeOnly("com.h2database:h2:2.2.220")
 
-  implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+  implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.5")
   implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
   implementation("org.apache.commons:commons-lang3:3.18.0")
