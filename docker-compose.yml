@@ -28,7 +28,7 @@ services:
       - ./src/main/resources/db/local/init:/docker-entrypoint-initdb.d:ro
 
   ingress:
-    image: nginx:1.27-alpine
+    image: nginx:1.29-alpine
     container_name: ingress
     networks:
       - hmpps
