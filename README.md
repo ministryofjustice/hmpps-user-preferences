@@ -1,6 +1,6 @@
 # HMPPS User Preferences
 
-[![CircleCI](https://circleci.com/gh/ministryofjustice/hmpps-user-preferences.svg?style=svg)](https://circleci.com/gh/ministryofjustice/hmpps-user-preferences)
+[![Pipeline [test -> build -> deploy]](https://github.com/ministryofjustice/hmpps-user-preferences/actions/workflows/pipeline.yml/badge.svg)](https://github.com/ministryofjustice/hmpps-user-preferences/actions/workflows/pipeline.yml)
 [![Swagger API docs (needs VPN)](https://img.shields.io/badge/API_docs_(needs_VPN)-view-85EA2D.svg?logo=swagger)](https://hmpps-user-preferences.hmpps.service.justice.gov.uk/swagger-ui/index.html)
 
 An API to store and retrieve an **HMPPS Users**' preferences where an **HMPPS User** is a user authenticated
@@ -27,7 +27,7 @@ For more information, check our [Runbook](https://dsdmoj.atlassian.net/wiki/spac
 ### Requirements
 
 - Docker
-- Java
+- Java 25
 
 Build and test:
 
@@ -55,6 +55,32 @@ The database is automatically initialised on application startup with Flyway.
 If you want to run the application locally with an empty database, run: 
 ```bash
 ./scripts/db-init.sh
+```
+
+## Builds
+
+We use GitHub Actions for CI builds, and GitHub Container Registry for Docker images.
+You can also run builds locally to help with testing and debugging.
+
+### How the build works
+
+The project uses Gradle to produce a Spring Boot fat JAR, and Docker to package it into a container image.
+In CI, the pipeline runs `./gradlew assemble`, copies the JAR to the project root, and passes `BUILD_NUMBER` as a Docker build arg. The `Dockerfile` expects the JAR at the project root as `hmpps-user-preferences-${BUILD_NUMBER}.jar`.
+
+### Running a local Docker build
+
+To help debug builds, a helper script is provided to replicate the CI build locally:
+
+```bash
+./scripts/docker-build-local.sh
+```
+
+### Running checks locally
+
+To run the full build with tests and linting (same as CI):
+
+```bash
+./gradlew assemble check
 ```
 
 ## Code Style
