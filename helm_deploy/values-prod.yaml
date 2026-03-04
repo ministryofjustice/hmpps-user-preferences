@@ -1,39 +1,13 @@
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Per environment values which override defaults in hmpps-template-kotlin/values.yaml
 
-minReplicaCount: 2
-maxReplicaCount: 4
+generic-service:
+  ingress:
+    host: hmpps-user-preferences.hmpps.service.justice.gov.uk
 
-image:
-  repository: ghcr.io/ministryofjustice/hmpps-user-preferences
-  tag: latest
-  port: 8080
+  env:
+    HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
 
-ingress:
-  enabled: true
-  enable_whitelist: true
-  hosts:
-    - host: hmpps-user-preferences.hmpps.service.justice.gov.uk
-      cert_secret: hmpps-user-preferences-secret
-  path: /
-
-env:
-  JAVA_OPTS: "-Xmx512m"
-  HMPPSAUTH_BASEURL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
-
-whitelist:
-  office: "217.33.148.210/32"
-  health-kick: "35.177.252.195/32"
-  mojvpn: "81.134.202.29/32"
-  cloudplatform-live1-1: "35.178.209.113/32"
-  cloudplatform-live1-2: "3.8.51.207/32"
-  cloudplatform-live1-3: "35.177.252.54/32"
-  global-protect: "35.176.93.186/32"
-
-resources:
-  cpu:
-    limit: 1000m
-    request: 50m
-  memory:
-    limit: 1000Mi
-    request: 500Mi
+# CloudPlatform AlertManager receiver to route prometheus alerts to slack
+# See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
+generic-prometheus-alerts:
+  alertSeverity: PROD_ALERTS_SEVERITY_LABEL
