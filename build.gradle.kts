@@ -19,7 +19,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-validation")
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.flywaydb:flyway-database-postgresql:11.3.4")
-  runtimeOnly("org.postgresql:postgresql:42.5.5")
+  runtimeOnly("org.postgresql:postgresql:42.7.10")
   testRuntimeOnly("com.h2database:h2:2.2.220")
 
   implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
