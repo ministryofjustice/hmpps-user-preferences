@@ -3,6 +3,9 @@
 generic-service:
   replicaCount: 2
 
+  podDisruptionBudget:
+    enabled: false
+
   ingress:
     host: hmpps-user-preferences-dev.hmpps.service.justice.gov.uk
 
