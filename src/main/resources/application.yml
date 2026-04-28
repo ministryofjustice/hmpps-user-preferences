@@ -2,6 +2,10 @@ info.app:
   name: Hmpps User Preferences
   version: 1.0
 
+database:
+  schema:
+    name: hmppsuserpreferences
+
 spring:
   application:
     name: hmpps-user-preferences
