@@ -5,6 +5,7 @@ generic-service:
 
   ingress:
     host: hmpps-user-preferences-preprod.hmpps.service.justice.gov.uk
+    tlsSecretName: hmpps-user-preferences-secret
 
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"

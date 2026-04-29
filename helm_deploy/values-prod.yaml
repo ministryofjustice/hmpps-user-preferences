@@ -3,6 +3,7 @@
 generic-service:
   ingress:
     host: hmpps-user-preferences.hmpps.service.justice.gov.uk
+    tlsSecretName: hmpps-user-preferences-secret
 
   env:
     HMPPS-AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
