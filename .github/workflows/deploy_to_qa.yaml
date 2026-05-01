@@ -1,0 +1,31 @@
+name: Deploy to QA (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "version to be deployed to the environment - must already exist."
+        required: true
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  helm_lint:
+    name: helm lint
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/test_helm_lint.yml@v2 # WORKFLOW_VERSION
+    secrets: inherit
+    with:
+      environment: 'qa'
+  deploy_qa:
+    name: Deploy to environment
+    needs:
+      - helm_lint
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
+    secrets: inherit
+    with:
+      environment: 'qa'
+      app_version: ${{ inputs.version }}
+      slack_notification: 'false' # if 'true', it needs a valid (NON)PROD_RELEASES_SLACK_CHANNEL variable to be set
