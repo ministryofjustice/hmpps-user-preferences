@@ -1,0 +1,22 @@
+# Per environment values which override defaults in hmpps-template-kotlin/values.yaml
+
+generic-service:
+  replicaCount: 2
+
+  podDisruptionBudget:
+    enabled: false
+
+  ingress:
+    host: hmpps-user-preferences-qa.hmpps.service.justice.gov.uk
+    tlsSecretName: hmpps-user-preferences-secret
+
+  env:
+    APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
+    HMPPS-AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    SPRINGDOC_API-DOCS_ENABLED: "true"
+    SPRINGDOC_SWAGGER-UI_ENABLED: "true"
+
+# CloudPlatform AlertManager receiver to route prometheus alerts to slack
+# See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
+generic-prometheus-alerts:
+  alertSeverity: NON_PROD_ALERTS_SEVERITY_LABEL

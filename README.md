@@ -88,3 +88,13 @@ To run the full build with tests and linting (same as CI):
 [ktlint](https://github.com/pinterest/ktlint) is the authority on style and is enforced on build.
 
 Run `./gradlew ktlintFormat` to fix formatting errors in your code before commit.
+
+## QA Deployments
+
+QA deployments are triggered manually from the GitHub Actions UI.
+This allows QA to control which branches are deployed to QA, and when.
+
+Run the QA deployment: 
+> Actions tab > Deploy to QA (manual) > Run workflow > Select branch to deploy.
+
+QA helm chart values are in `helm_deploy/values-qa.yaml`.
