@@ -24,18 +24,17 @@ jobs:
         uses: ministryofjustice/hmpps-github-shared-actions/.github/actions/build-test-and-deploy/create_app_version@f52dbae537425d92f2216c4a2d9e0e44e603abb1 #v1
   gradle_verify:
     name: Validate the kotlin
+    needs: [ app_version ]
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/gradle_verify.yml@v2 # WORKFLOW_VERSION
     secrets: inherit
     with:
       gradle-command: 'BUILD_NUMBER=${{ needs.app_version.outputs.version}} ./gradlew assemble check'
       upload-build-artifacts: ${{ github.ref == 'refs/heads/main' }}
       java-version: "25"
-    needs:
-      - app_version
 
   build_qa:
     name: Build QA image
-    needs: [ helm_lint ]
+    needs: [ helm_lint, gradle_verify ]
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2
     secrets: inherit
     with:
