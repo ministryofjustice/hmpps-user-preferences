@@ -64,7 +64,8 @@ jobs:
       download_build_artifacts: true
   deploy_dev:
     name: Deploy to the dev environment
-    if: github.ref == 'refs/heads/main'
+    # Only deploy to dev from the development branch, not main.
+    if: github.ref == 'refs/heads/development'
     needs:
     - build
     - helm_lint
@@ -76,10 +77,11 @@ jobs:
       slack_notification: 'false' # if 'true', it needs a valid NONPROD_RELEASES_SLACK_CHANNEL variable to be set
   deploy_preprod:
     name: Deploy to the preprod environment
+    # deploy to preprod from main, merge dev to main when you want to deploy to preprod and prod
+    if: github.ref == 'refs/heads/main'
     needs:
     - build
     - helm_lint
-    - deploy_dev
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
     secrets: inherit
     with:
