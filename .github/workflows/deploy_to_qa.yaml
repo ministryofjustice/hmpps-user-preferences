@@ -14,6 +14,7 @@ jobs:
     secrets: inherit
     with:
       environment: qa
+
   app_version:
     runs-on: ubuntu-latest
     outputs:
@@ -22,6 +23,7 @@ jobs:
       - id: app_version
         name: Application version creators
         uses: ministryofjustice/hmpps-github-shared-actions/.github/actions/build-test-and-deploy/create_app_version@f52dbae537425d92f2216c4a2d9e0e44e603abb1 #v1
+
   gradle_verify:
     name: Validate the kotlin
     needs: [ app_version ]
@@ -29,7 +31,7 @@ jobs:
     secrets: inherit
     with:
       gradle-command: 'BUILD_NUMBER=${{ needs.app_version.outputs.version}} ./gradlew assemble check'
-      upload-build-artifacts: ${{ github.ref == 'refs/heads/main' }}
+      upload-build-artifacts: true
       java-version: "25"
 
   build_qa:
@@ -44,7 +46,7 @@ jobs:
       # additional_docker_tag: qa
       push: true
       docker_multiplatform: false
-      download_build_artifacts: false
+      download_build_artifacts: true
 
   deploy_qa:
     name: Deploy to QA
