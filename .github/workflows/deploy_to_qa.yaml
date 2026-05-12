@@ -1,0 +1,59 @@
+name: Deploy to QA (manual)
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  helm_lint:
+    name: helm lint
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/test_helm_lint.yml@v2
+    secrets: inherit
+    with:
+      environment: qa
+
+  app_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.app_version.outputs.version }}
+    steps:
+      - id: app_version
+        name: Application version creators
+        uses: ministryofjustice/hmpps-github-shared-actions/.github/actions/build-test-and-deploy/create_app_version@f52dbae537425d92f2216c4a2d9e0e44e603abb1 #v1
+
+  gradle_verify:
+    name: Validate the kotlin
+    needs: [ app_version ]
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/gradle_verify.yml@v2 # WORKFLOW_VERSION
+    secrets: inherit
+    with:
+      gradle-command: 'BUILD_NUMBER=${{ needs.app_version.outputs.version}} ./gradlew assemble check'
+      upload-build-artifacts: true
+      java-version: "25"
+
+  build_qa:
+    name: Build QA image
+    needs: [ helm_lint, gradle_verify ]
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2
+    secrets: inherit
+    with:
+      docker_registry: ghcr.io
+      registry_org: ministryofjustice
+      # Optional but recommended: makes it obvious this is a QA build tag in GHCR
+      # additional_docker_tag: qa
+      push: true
+      docker_multiplatform: false
+      download_build_artifacts: true
+
+  deploy_qa:
+    name: Deploy to QA
+    needs: [build_qa]
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
+    secrets: inherit
+    with:
+      environment: qa
+      app_version: ${{ needs.build_qa.outputs.app_version }}
+      slack_notification: "false"

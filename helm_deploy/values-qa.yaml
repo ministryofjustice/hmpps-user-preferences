@@ -7,7 +7,7 @@ generic-service:
     enabled: false
 
   ingress:
-    host: hmpps-user-preferences-dev.hmpps.service.justice.gov.uk
+    host: hmpps-user-preferences-qa.hmpps.service.justice.gov.uk
     tlsSecretName: hmpps-user-preferences-secret
 
   env:

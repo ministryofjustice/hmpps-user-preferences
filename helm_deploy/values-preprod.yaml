@@ -5,10 +5,11 @@ generic-service:
 
   ingress:
     host: hmpps-user-preferences-preprod.hmpps.service.justice.gov.uk
+    tlsSecretName: hmpps-user-preferences-secret
 
   env:
     APPLICATIONINSIGHTS_CONFIGURATION_FILE: "applicationinsights.dev.json"
-    HMPPS_AUTH_URL: "https://sign-in-preprod.hmpps.service.justice.gov.uk/auth"
+    HMPPS-AUTH_URL: "https://sign-in-preprod.hmpps.service.justice.gov.uk/auth"
 
 # CloudPlatform AlertManager receiver to route prometheus alerts to slack
 # See https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/how-to-create-alarms.html#creating-your-own-custom-alerts
