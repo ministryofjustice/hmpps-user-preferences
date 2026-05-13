@@ -51,7 +51,7 @@ jobs:
       - app_version
   build:
     name: Build docker image from hmpps-github-actions
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
     needs:
       - gradle_verify
@@ -65,7 +65,7 @@ jobs:
   deploy_dev:
     name: Deploy to the dev environment
     # Only deploy to dev from the development branch, not main.
-    if: github.ref == 'refs/heads/development'
+    if: github.ref == 'refs/heads/develop'
     needs:
     - build
     - helm_lint
