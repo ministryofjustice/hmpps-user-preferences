@@ -89,12 +89,57 @@ To run the full build with tests and linting (same as CI):
 
 Run `./gradlew ktlintFormat` to fix formatting errors in your code before commit.
 
-## QA Deployments
+---
+
+## Branching & Deployments
+### Branching
+We use the following branching strategy:
+- `main` - protected branch, deployable to preprod and prod environments
+- `develop` - protected branch, deployable to dev environment on merge
+- Feature branches - created from `develop`, merged back to `develop` when ready
+
+We use a Gitflow process, with pull requests from feature branches 
+to `develop`, and from `develop` to `main`.
+
+> **Workflow example:**
+> 
+> 1. Checkout `develop` branch.
+> 2. Create a feature branch from `develop`.
+> 3. Make changes and commit them on your feature branch.
+> 4. Push feature branch to remote.
+> 5. Raise a PR from your feature branch to `develop`.
+> 6. Ping **#pic-devs** with your PR for review and approval.
+> 7. Merge your PR into `develop` (triggers deployment to dev environment)
+> 8. Update Jira ticket with pull request link and move to "Ready for QA"
+> 9. When ready to release, raise a PR from `develop` to `main` branch.
+> 10. Merge PR to `main` (triggers deployment to preprod environment)
+> 11. When ready to deploy to prod, approve the deployment in GitHub Actions.
+
+
+### Deployments
+
+| Env     | Branch  | Trigger   | Approval | Examples                                    |
+|---------|---------|-----------|----------|---------------------------------------------|
+| dev     | develop | Automatic | None     | When PR is merged to develop branch         |
+| qa      | any*    | Manual    | None     | When QA engineneer runs action              |
+| preprod | main    | Automatic | None     | When PR is merged to main                   |
+| prod    | main    | Automatic | Manual   | When deployment is manually approved in GHA |
+
+**Additional protections:**
+1. Commits must be signed
+2. Only developers with write access can merge PRs to `develop` and `main` branches.
+3. PRs made to `develop` need to be approved by another developer before they can be merged.
+4. Only developers with write access can approve deployments to prod.
+5. Deployments to qa are triggered manually from the GitHub Actions UI – requires write access.
+
+### QA Deployments
 
 QA deployments are triggered manually from the GitHub Actions UI.
 This allows QA to control which branches are deployed to QA, and when.
 
-Run the QA deployment: 
-> Actions tab > Deploy to QA (manual) > Run workflow > Select branch to deploy.
+> **Run the QA deployment:**
+> 
+> GitHub Actions tab > Deploy to QA (manual) > Run workflow > Select branch to deploy.
 
-QA helm chart values are in `helm_deploy/values-qa.yaml`.
+A fresh build is created for the selected branch, and deployed to the QA environment.
+Helm Chart values for qa environment are in `helm_deploy/values-qa.yaml`.
