@@ -1,6 +1,8 @@
 # Per environment values which override defaults in hmpps-template-kotlin/values.yaml
 
 generic-service:
+  replicaCount: 2
+
   ingress:
     host: hmpps-user-preferences.hmpps.service.justice.gov.uk
     tlsSecretName: hmpps-user-preferences-secret
