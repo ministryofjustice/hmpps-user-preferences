@@ -19,7 +19,7 @@ class TestSecurityConfig {
 internal class TestJwtDecoder : JwtDecoder {
   private val claimSetConverter = MappedJwtClaimSetConverter.withDefaults(emptyMap())
 
-  override fun decode(token: String): Jwt? {
+  override fun decode(token: String): Jwt {
     // extract headers and claims, but do not attempt to verify signature
     val jwt = JWTParser.parse(token)
     val headers = LinkedHashMap<String, Any>(jwt.header.toJSONObject())
