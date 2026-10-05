@@ -43,7 +43,7 @@ dependencies {
 configurations.all {
   resolutionStrategy {
     // Force patched version of rhino to fix CVE-2025-66453
-    force("org.mozilla:rhino:1.7.14.1")
+    force("org.mozilla:rhino:1.9.1")
 
     // These patches are due to vulnerable deps used
     // TODO: remove when we next update
