@@ -1,5 +1,5 @@
 ARG BUILDER_IMAGE=ghcr.io/ministryofjustice/hmpps-hardened-eclipse-temurin-java25:v1.1.1
-ARG RUNTIME_IMAGE=ghcr.io/ministryofjustice/hmpps-hardened-distroless-java25:v1.1.1
+ARG RUNTIME_IMAGE=ghcr.io/ministryofjustice/hmpps-hardened-distroless-java25:v1.1.2
 
 FROM --platform=$BUILDPLATFORM ${BUILDER_IMAGE} AS builder
 
