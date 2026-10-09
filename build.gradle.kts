@@ -3,7 +3,7 @@ plugins {
   kotlin("plugin.spring") version "2.3.0"
   kotlin("jvm") version "2.2.0"
   kotlin("plugin.jpa") version "2.2.0"
-  id("org.flywaydb.flyway") version "11.3.4"
+  id("org.flywaydb.flyway") version "13.10.0"
 }
 
 dependencies {
