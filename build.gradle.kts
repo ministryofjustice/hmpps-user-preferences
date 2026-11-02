@@ -1,10 +1,13 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.11"
-  kotlin("plugin.spring") version "2.3.0"
-  kotlin("jvm") version "2.2.0"
-  kotlin("plugin.jpa") version "2.2.0"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.14"
+  kotlin("plugin.spring") version "2.4.21"
+  kotlin("jvm") version "2.4.21"
+  kotlin("plugin.jpa") version "2.4.21"
   id("org.flywaydb.flyway") version "11.3.4"
 }
+
+extra["logback.version"] = "1.6.5"
+extra["opentelemetry.version"] = "1.67.0"
 
 dependencies {
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.3")
@@ -51,8 +54,8 @@ configurations.all {
     // picking up the vulnerable version, so I am forcing the patched version here as well
     // Force patched version of assertj to fix CVE-2026-24400 (score 7.3)
     force("org.assertj:assertj-core:3.27.7")
-    // Force patched version of tomcat embed to fix CVE-2026-24734 (score 7.5)
-    force("org.apache.tomcat.embed:tomcat-embed-core:11.0.18")
+    // Pin ASM to 9.11 to address CVE-2026-110261, CVE-2026-110257, CVE-2026-110263, CVE-2026-110258, and CVE-2026-110260; remove when the managed version is patched.
+    force("org.ow2.asm:asm:9.11")
   }
 }
 

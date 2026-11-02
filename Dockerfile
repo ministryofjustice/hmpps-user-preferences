@@ -1,7 +1,5 @@
-ARG BUILDER_IMAGE=ghcr.io/ministryofjustice/hmpps-hardened-eclipse-temurin-java25:v1.1.1
-ARG RUNTIME_IMAGE=ghcr.io/ministryofjustice/hmpps-hardened-distroless-java25:v1.1.1
-
-FROM --platform=$BUILDPLATFORM ${BUILDER_IMAGE} AS builder
+ARG BASE_IMAGE=ghcr.io/ministryofjustice/hmpps-eclipse-temurin:25-jre-jammy
+FROM --platform=$BUILDPLATFORM ${BASE_IMAGE} AS builder
 
 ARG BUILD_NUMBER
 ENV BUILD_NUMBER=${BUILD_NUMBER:-1_0_0}
@@ -10,17 +8,18 @@ WORKDIR /builder
 COPY hmpps-user-preferences-${BUILD_NUMBER}.jar app.jar
 RUN java -Djarmode=tools -jar app.jar extract --layers --destination extracted
 
-FROM ${RUNTIME_IMAGE}
-LABEL maintainer="HMPPS Digital Studio <info@digital.justice.gov.uk>"
+FROM ${BASE_IMAGE}
 
-COPY --chown=2000:2000 applicationinsights.json ./
-COPY --chown=2000:2000 applicationinsights.dev.json ./
-COPY --chown=2000:2000 applicationinsights-agent*.jar ./agent.jar
-COPY --from=builder --chown=2000:2000 /builder/extracted/dependencies/ ./
-COPY --from=builder --chown=2000:2000 /builder/extracted/spring-boot-loader/ ./
-COPY --from=builder --chown=2000:2000 /builder/extracted/snapshot-dependencies/ ./
-COPY --from=builder --chown=2000:2000 /builder/extracted/application/ ./
+ARG BUILD_NUMBER
+ENV BUILD_NUMBER=${BUILD_NUMBER:-1_0_0}
 
-USER 2000:2000
+WORKDIR /app
+COPY --chown=appuser:appgroup applicationinsights.json ./
+COPY --chown=appuser:appgroup applicationinsights.dev.json ./
+COPY --chown=appuser:appgroup applicationinsights-agent*.jar ./agent.jar
+COPY --from=builder --chown=appuser:appgroup /builder/extracted/dependencies/ ./
+COPY --from=builder --chown=appuser:appgroup /builder/extracted/spring-boot-loader/ ./
+COPY --from=builder --chown=appuser:appgroup /builder/extracted/snapshot-dependencies/ ./
+COPY --from=builder --chown=appuser:appgroup /builder/extracted/application/ ./
 
 ENTRYPOINT ["java", "-XX:+ExitOnOutOfMemoryError", "-XX:+AlwaysActAsServerClassMachine", "-javaagent:agent.jar", "-jar", "app.jar"]
