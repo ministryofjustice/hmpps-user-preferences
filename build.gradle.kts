@@ -54,8 +54,8 @@ configurations.all {
     // picking up the vulnerable version, so I am forcing the patched version here as well
     // Force patched version of assertj to fix CVE-2026-24400 (score 7.3)
     force("org.assertj:assertj-core:3.27.7")
-    // Pin ASM to 9.11 to address CVE-2026-110261, CVE-2026-110257, CVE-2026-110263, CVE-2026-110258, and CVE-2026-110260; remove when the managed version is patched.
-    force("org.ow2.asm:asm:9.11")
+    // Pin patched ASM; remove when transitive dependencies provide a safe version.
+    force("org.ow2.asm:asm:9.11.1")
   }
 }
 
