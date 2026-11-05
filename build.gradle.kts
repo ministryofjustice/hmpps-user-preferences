@@ -3,7 +3,7 @@ plugins {
   kotlin("plugin.spring") version "2.4.21"
   kotlin("jvm") version "2.4.21"
   kotlin("plugin.jpa") version "2.4.21"
-  id("org.flywaydb.flyway") version "11.3.4"
+  id("org.flywaydb.flyway") version "13.12.1"
 }
 
 extra["logback.version"] = "1.6.5"
