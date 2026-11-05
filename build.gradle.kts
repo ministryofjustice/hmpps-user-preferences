@@ -1,9 +1,9 @@
 plugins {
-  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.14"
+  id("uk.gov.justice.hmpps.gradle-spring-boot") version "11.0.15"
   kotlin("plugin.spring") version "2.4.21"
   kotlin("jvm") version "2.4.21"
   kotlin("plugin.jpa") version "2.4.21"
-  id("org.flywaydb.flyway") version "11.3.4"
+  id("org.flywaydb.flyway") version "11.20.3"
 }
 
 extra["logback.version"] = "1.6.5"
@@ -13,7 +13,7 @@ dependencies {
   implementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter:3.0.3")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-webclient")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0")
   implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 
   // database
@@ -23,12 +23,12 @@ dependencies {
   runtimeOnly("org.flywaydb:flyway-core")
   runtimeOnly("org.flywaydb:flyway-database-postgresql")
   runtimeOnly("org.postgresql:postgresql")
-  testRuntimeOnly("com.h2database:h2:2.2.220")
+  testRuntimeOnly("com.h2database:h2:2.5.252")
 
   implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
-  implementation("com.microsoft.azure:applicationinsights-web:3.5.4")
+  implementation("com.microsoft.azure:applicationinsights-web:3.7.10")
   implementation("com.microsoft.azure:applicationinsights-logging-logback:2.6.4")
-  implementation("org.apache.commons:commons-lang3:3.18.0")
+  implementation("org.apache.commons:commons-lang3:3.21.0")
 
   // Test
   testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
@@ -36,8 +36,8 @@ dependencies {
   testImplementation("uk.gov.justice.service.hmpps:hmpps-kotlin-spring-boot-starter-test:3.0.3")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
   testImplementation("org.wiremock:wiremock-standalone:3.13.2")
-  testImplementation("au.com.dius.pact.provider:junit5spring:4.6.20")
-  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.38") {
+  testImplementation("au.com.dius.pact.provider:junit5spring:4.7.7")
+  testImplementation("io.swagger.parser.v3:swagger-parser:2.1.48") {
     exclude(group = "io.swagger.core.v3")
   }
 }
@@ -46,7 +46,7 @@ dependencies {
 configurations.all {
   resolutionStrategy {
     // Force patched version of rhino to fix CVE-2025-66453
-    force("org.mozilla:rhino:1.7.14.1")
+    force("org.mozilla:rhino:1.9.2")
 
     // These patches are due to vulnerable deps used
     // TODO: remove when we next update
